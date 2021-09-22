@@ -1,0 +1,7 @@
+export enum Pages {
+  HOME = "HOME",
+  COURSES = "COURSES",
+  SERVICES = "SERVICES",
+  REVIEWS = "REVIEWS",
+  CONTACTS = "CONTACTS",
+}

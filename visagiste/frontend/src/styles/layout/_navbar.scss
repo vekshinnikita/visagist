@@ -1,0 +1,74 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/variables' as *;
+
+header {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+  padding: 20px;
+  background: var(--light-grey);
+
+  .logo {
+    font-size: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--black);
+    border-right: 5px solid;
+    padding-right: 10px;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+
+    nav {
+      display: flex;
+      padding-right: 20px;
+
+      a {
+        padding: 0 10px;
+        text-decoration: none;
+        font-size: 16px;
+        color: var(--black);
+        text-transform: uppercase;
+      }
+    }
+
+    .toggler {
+      width: 30px;
+      height: 22px;
+      position: relative;
+      display: none;
+
+      @include respond-to($small) {
+        display: block;
+      }
+
+      span {
+        height: 2px;
+        background: var(--black);
+        position: absolute;
+        left: 0;
+
+        &:nth-child(1) {
+          top: 0;
+          width: 22px;
+        }
+
+        &:nth-child(2) {
+          top: 0;
+          bottom: 0;
+          right: 0;
+          margin: auto;
+          width: 100%;
+        }
+
+        &:nth-child(3) {
+          bottom: 0;
+          width: 18px;
+        }
+      }
+    }
+  }
+}
