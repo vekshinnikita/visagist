@@ -1,0 +1,7 @@
+@forward "./courses";
+@forward "./edit_course";
+
+section {
+  z-index: 100;
+  min-height: 80vh;
+}

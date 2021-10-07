@@ -1,0 +1,14 @@
+.button {
+  outline: none;
+  padding: 10px 20px;
+  color: var(--white);
+  position: relative;
+  border-radius: 10px;
+  background-color: var(--blue);
+  border: none;
+  cursor: pointer;
+}
+
+.button-red {
+  background-color: var(--red);
+}

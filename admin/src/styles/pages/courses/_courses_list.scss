@@ -1,0 +1,154 @@
+section.courses-list {
+  padding: 30px 200px;
+  display: flex;
+  justify-content: space-evenly;
+
+  .create-course {
+    h2 {
+      font-size: 25px;
+      color: var(--black);
+      padding-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .is-visible {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &:hover {
+          .radio {
+            background-color: var(--light-blue);
+          }
+        }
+
+        h4 {
+          padding-right: 10px;
+        }
+      }
+
+      .image-field {
+        width: 200px;
+        height: 200px;
+      }
+
+      button {
+        width: fit-content;
+      }
+    }
+  }
+
+  .courses-list-container {
+    width: 50%;
+
+    .actions {
+      display: flex;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--light-grey);
+
+      .button {
+        margin-right: 10px;
+      }
+
+      .select {
+        width: 150px;
+        position: relative;
+
+        .option-current {
+          width: 100%;
+          border-radius: 10px;
+        }
+
+        .option-current-active {
+          border-radius: 10px 10px 0 0 !important;
+        }
+
+        .option {
+          background: var(--slight-blue);
+          border: 1px solid var(--light-blue);
+          color: var(--grey);
+          padding: 10px 0;
+          cursor: pointer;
+
+          &:last-child {
+            border-radius: 0 0 10px 10px;
+          }
+        }
+
+        .options-active {
+          display: flex !important;
+        }
+
+        .options {
+          width: 100%;
+          flex-direction: column;
+          display: none;
+          position: absolute;
+          z-index: 10;
+
+          &:last-child {
+            border-radius: 0 0 10px 10px;
+          }
+        }
+      }
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+
+      .course-item-invisible {
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          background: var(--grey);
+          z-index: 1;
+          opacity: 0.5;
+          border-radius: 10px;
+        }
+      }
+
+      .course-item {
+        padding: 15px;
+        border-bottom: 1px solid var(--light-grey);
+        display: flex;
+        justify-content: space-between;
+        transition: all 0.5s ease;
+        border-radius: 10px;
+
+        &:last-child {
+          border-bottom: unset;
+        }
+
+        &:hover {
+          background: var(--slight-blue);
+        }
+
+        a {
+          color: var(--grey);
+          text-decoration: none;
+          font-size: 20px;
+          transition: all 0.5s ease;
+          z-index: 2;
+
+          &:hover {
+            color: var(--blue);
+          }
+        }
+      }
+    }
+  }
+}

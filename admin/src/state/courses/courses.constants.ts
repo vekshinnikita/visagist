@@ -1,0 +1,31 @@
+export const GET_CURRENT_COURSE = "@courses/GET_CURRENT_COURSE";
+export const GET_CURRENT_COURSE_SUCCESS = "@courses/GET_CURRENT_COURSE_SUCCESS";
+export const GET_CURRENT_COURSE_FAILED = "@courses/GET_CURRENT_COURSE_FAILED";
+
+export const GET_COURSES = "@courses/GET_COURSES";
+export const GET_COURSES_SUCCESS = "@courses/GET_COURSES_SUCCESS";
+export const GET_COURSES_FAILED = "@courses/GET_COURSES_FAILED";
+
+export const DELETE_COURSE = "@courses/DELETE_COURSE";
+export const DELETE_COURSE_SUCCESS = "@courses/DELETE_COURSE_SUCCESS";
+export const DELETE_COURSE_FAILED = "@courses/DELETE_COURSE_FAILED";
+
+export const CREATE_COURSE = "@courses/CREATE_COURSE";
+export const CREATE_COURSE_SUCCESS = "@courses/CREATE_COURSE_SUCCESS";
+export const CREATE_COURSE_FAILED = "@courses/CREATE_COURSE_FAILED";
+
+export const UPDATE_COURSE = "@courses/UPDATE_COURSE";
+export const UPDATE_COURSE_SUCCESS = "@courses/UPDATE_COURSE_SUCCESS";
+export const UPDATE_COURSE_FAILED = "@courses/UPDATE_COURSE_FAILED";
+
+export const HIDE_COURSES = "@courses/HIDE_COURSES";
+export const HIDE_COURSES_SUCCESS = "@courses/HIDE_COURSES_SUCCESS";
+export const HIDE_COURSES_FAILED = "@courses/HIDE_COURSES_FAILED";
+
+export const REVEAL_COURSES = "@courses/REVEAL_COURSES";
+export const REVEAL_COURSES_SUCCESS = "@courses/REVEAL_COURSES_SUCCESS";
+export const REVEAL_COURSES_FAILED = "@courses/REVEAL_COURSES_FAILED";
+
+export const DELETE_COURSES = "@courses/DELETE_COURSES";
+export const DELETE_COURSES_SUCCESS = "@courses/DELETE_COURSES_SUCCESS";
+export const DELETE_COURSES_FAILED = "@courses/DELETE_COURSES_FAILED";

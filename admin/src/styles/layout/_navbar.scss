@@ -1,0 +1,131 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  padding: 15px 150px;
+  background: var(--light-grey);
+  border-bottom: 4px solid var(--light-blue);
+  z-index: 1000;
+  background: var(--white);
+
+  .logo {
+    font-size: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--black);
+    border-right: 5px solid;
+    padding-right: 10px;
+    margin-right: 20px;
+  }
+
+  .menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    nav {
+      display: flex;
+      padding-right: 20px;
+
+      a {
+        padding: 0 10px;
+        text-decoration: none;
+        font-size: 16px;
+        color: var(--grey);
+        text-transform: uppercase;
+        transition: all 0.6s ease;
+
+        &:hover {
+          color: var(--light-blue);
+        }
+      }
+    }
+
+    .extra-nav {
+      position: relative;
+
+      .icon {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+
+        &:hover {
+          span {
+            background-color: var(--blue);
+          }
+        }
+
+        span {
+          width: 4.5px;
+          height: 4.5px;
+          position: absolute;
+          border-radius: 100%;
+          background: var(--light-blue);
+          transition: all 0.6s ease;
+
+          &:nth-child(1) {
+            top: 0;
+            left: 0;
+          }
+
+          &:nth-child(2) {
+            top: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+          }
+
+          &:nth-child(3) {
+            top: 0;
+            right: 0;
+          }
+
+          &:nth-child(4) {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+          }
+
+          &:nth-child(5) {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+          }
+
+          &:nth-child(6) {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto 0;
+          }
+
+          &:nth-child(7) {
+            bottom: 0;
+            left: 0;
+          }
+
+          &:nth-child(8) {
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
+          }
+
+          &:nth-child(9) {
+            bottom: 0;
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+}

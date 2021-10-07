@@ -1,0 +1,137 @@
+@use "../../abstracts/mixins" as *;
+
+.widget-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    position: absolute;
+    left: -40px;
+    gap: 10px;
+    z-index: 1;
+
+    button {
+      border: none;
+      padding: 7px;
+      font-size: 15px;
+      background-color: var(--light-grey);
+      border-radius: 100px;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.5s ease;
+
+      &:hover {
+        i {
+          color: var(--light-blue);
+
+          &::before {
+            color: var(--light-blue);
+          }
+        }
+      }
+
+      i {
+        transition: all 0.5s ease;
+        color: var(--grey);
+
+        &::before {
+          transition: all 0.5s ease;
+        }
+      }
+    }
+  }
+}
+
+.widget-invisible {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -10px;
+    left: -50px;
+    background: var(--grey);
+    z-index: 1;
+    opacity: 0.5;
+    border-radius: 10px;
+  }
+}
+
+.widget {
+  padding: 50px;
+  background: var(--light-grey);
+  border-radius: 10px;
+  width: 100%;
+}
+
+.image-widget {
+  img {
+    width: 100%;
+  }
+
+  .image-field {
+    height: 200px;
+  }
+}
+
+.options-widget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    font-weight: 600;
+    width: calc(100% / 4);
+    margin-bottom: 20px;
+
+    input {
+      width: 70%;
+    }
+
+    i {
+      background: var(--slight-blue);
+      border-radius: 100%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    h3 {
+      text-align: center;
+      width: 100px;
+    }
+  }
+
+  .create-option {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: var(--slight-blue);
+    border: 2px dashed var(--light-blue);
+    color: var(--light-blue);
+    margin-top: 30px;
+    cursor: pointer;
+  }
+}
+
+.text-widget {
+  @include disable-reset;
+}

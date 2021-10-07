@@ -1,0 +1,68 @@
+.base-input {
+  border-radius: 10px;
+  border: 1px solid var(--light-blue);
+  background: var(--slight-blue);
+  color: var(--grey);
+  padding: 10px 20px;
+  outline: none;
+}
+
+.image-field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  input {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+  }
+
+  .loaded-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+  }
+
+  .delete-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    border-radius: 100%;
+    top: -5px;
+    left: -5px;
+    font-size: 25px;
+    position: absolute;
+    z-index: 2;
+    width: 25px;
+    height: 25px;
+    background: var(--red);
+    transform: rotate(45deg);
+    cursor: pointer;
+  }
+
+  label {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    border: dashed 2px var(--light-blue);
+    background: var(--slight-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+  }
+}

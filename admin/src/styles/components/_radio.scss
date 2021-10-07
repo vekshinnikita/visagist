@@ -1,0 +1,13 @@
+.radio {
+  width: 20px;
+  height: 20px;
+  background: var(--light-grey);
+  transition: all 0.5s ease;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 2;
+
+  &:hover {
+    background-color: var(--light-blue);
+  }
+}
