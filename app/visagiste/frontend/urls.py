@@ -3,5 +3,5 @@ from .views import index
 
 urlpatterns = [
     path('', index),
-    # re_path(r'^(?!media).*/$', index),
+    re_path(r'^(?!media).*/$', index),
 ]

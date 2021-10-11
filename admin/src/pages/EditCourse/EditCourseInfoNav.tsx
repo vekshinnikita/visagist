@@ -33,7 +33,7 @@ const EditCourseInfoNav: FC<EditCourseInfoNavProps> = ({
     setTitle(course.title);
     setPosition(course.position);
     setIsVisible(course.is_visible);
-    if (course.image) setCourseImage("data:image/jpeg;base64," + course.image);
+    setCourseImage(course.image);
   }, [course]);
 
   return (

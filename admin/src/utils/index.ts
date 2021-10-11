@@ -100,3 +100,23 @@ const compareByDraggablePosition = (w1: Draggable, w2: Draggable) => {
 
 export const sortDraggableByPosition = (draggable: Draggable[]): any =>
   draggable.sort(compareByDraggablePosition);
+
+export const checkDateTimeFormat = (hms: number) =>
+  String(hms).length === 1 ? "0" + hms : hms;
+
+export const stringifyDate = (date: Date) => {
+  // y-m-dTh:m:s+08:00
+  // 2021-10-12T03:47:00+08:00
+  const year = checkDateTimeFormat(date.getFullYear());
+  const month = checkDateTimeFormat(date.getMonth() + 1);
+  const day = checkDateTimeFormat(date.getDate());
+  const hours = checkDateTimeFormat(date.getHours());
+  const minutes = checkDateTimeFormat(date.getMinutes());
+  const seconds = checkDateTimeFormat(date.getSeconds());
+  let timezone = `${checkDateTimeFormat(
+    -(new Date().getTimezoneOffset() / 60)
+  )}:00`;
+  timezone = timezone.startsWith("-") ? timezone : "+" + timezone;
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
+};

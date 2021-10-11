@@ -1,9 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
-from drf_extra_fields.fields import Base64ImageField
-from core.serializers import ImageSerializer, DraggableSerializer
-from widgets.models import Widget, TextWidget, ImageWidget, OptionsWidget, CourseScheduleWidget, CourseFormatsWidget, CourseImagesWidget, CourseProgramWidget
-from .components import OptionComponentSerializer, CourseLessonComponentSerializer, CourseFormatComponentSerializer, CourseProgramComponentSerializer
-from .fields import ImagesField
+from core.serializers import ImageSerializer, DraggableSerializer, Base64ImageField
+from widgets.models import Widget, TextWidget, ImageWidget, FeaturesWidget, CourseScheduleWidget, CourseImagesWidget, CourseProgramWidget
+from .children import *
 
 
 class WidgetSerializer(DraggableSerializer):
@@ -24,77 +22,60 @@ class ImageWidgetSerializer(WidgetSerializer):
     class Meta:
         model = ImageWidget
         fields = ['image'] + WidgetSerializer.Meta.fields
-    
 
-class OptionsWidgetSerializer(WidgetSerializer):
-    options = OptionComponentSerializer(many=True)
+class WidgetWithChildrenSerializer(WidgetSerializer):
+    children_serializer = ChildSerializer
+    children_related_name = None
+    children = children_serializer(source=children_related_name, many=True)
 
     class Meta:
-        model = OptionsWidget
-        fields = ['options'] + WidgetSerializer.Meta.fields
+        model = Widget
+        fields = ['children'] + WidgetSerializer.Meta.fields
     
     def create(self, validated_data):
-        widget = OptionsWidget.objects.create(course=validated_data['course'])
-        options = validated_data['options']
+        children = validated_data.pop(self.children_related_name)
+        widget = self.Meta.model.objects.create(**validated_data)
     
-        for o in options:
-            serializer = OptionComponentSerializer(data={'widget': widget.id, **o})
+        for c in children:
+            serializer = self.children_serializer(data={'widget': widget.id, **c})
             serializer.is_valid(raise_exception=True)
             serializer.save()
         
         return widget
 
 
-class CourseScheduleWidgetSerializer(WidgetSerializer):
-    lessons = CourseLessonComponentSerializer(many=True)
+class FeaturesWidgetSerializer(WidgetWithChildrenSerializer):
+    children_serializer = FeatureSerializer
+    children_related_name = 'features'
+    children = children_serializer(source=children_related_name, many=True)
+
+    class Meta:
+        model = FeaturesWidget
+        fields = WidgetWithChildrenSerializer.Meta.fields
+
+
+class CourseScheduleWidgetSerializer(WidgetWithChildrenSerializer):
+    children_serializer = CourseLessonSerializer
+    children_related_name = 'lessons'
+    children = children_serializer(source=children_related_name, many=True)
 
     class Meta:
         model = CourseScheduleWidget
-        fields = ['lessons'] + WidgetSerializer.Meta.fields
-    
-    def create(self, validated_data):
-        widget = CourseScheduleWidget.objects.create(course=validated_data['course'])
-        lessons = validated_data['lessons']
-
-        for l in lessons:
-            serializer = CourseLessonComponentSerializer(data={'widget': widget.id, **l})
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
+        fields = WidgetWithChildrenSerializer.Meta.fields
 
 
-class CourseFormatsWidgetSerializer(WidgetSerializer):
-    formats = CourseFormatComponentSerializer(many=True)
-
-    class Meta:
-        model = CourseFormatsWidget
-        fields = ['formats'] + WidgetSerializer.Meta.fields
-    
-    def create(self, validated_data):
-        widget = CourseFormatsWidget.objects.create(course=validated_data['course'])
-        formats = validated_data['formats']
-
-        for f in formats:
-            serializer = CourseFormatComponentSerializer(data={'widget': widget.id, **f})
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-        
-        return widget
-
-
-class CourseImagesWidgetSerializer(WidgetSerializer):
-    images = ImagesField()
+class CourseImagesWidgetSerializer(WidgetWithChildrenSerializer):
+    children_serializer = ImageSerializer
+    children_related_name = 'images'
+    children = children_serializer(source=children_related_name, many=True)
 
     class Meta:
         model = CourseImagesWidget
-        fields = ['images'] + WidgetSerializer.Meta.fields
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['images'].context.update(self.context)
+        fields = WidgetWithChildrenSerializer.Meta.fields
 
     def create(self, validated_data):
-        widget = CourseImagesWidget.objects.create(course=validated_data['course'])
-        images = validated_data['images']
+        images = validated_data.pop('images')
+        widget = CourseImagesWidget.objects.create(**validated_data)
 
         for i in images:
             serializer = ImageSerializer(data={
@@ -108,24 +89,11 @@ class CourseImagesWidgetSerializer(WidgetSerializer):
         return widget
 
 
-class CourseProgramWidgetSerializer(WidgetSerializer):
-    programs = CourseProgramComponentSerializer(many=True)
+class CourseProgramWidgetSerializer(WidgetWithChildrenSerializer):
+    children_serializer = CourseProgramModuleSerializer
+    children_related_name = 'programs'
+    children = children_serializer(source=children_related_name, many=True)
 
     class Meta:
         model = CourseProgramWidget
-        fields = ['programs'] + WidgetSerializer.Meta.fields
-    
-    def create(self, validated_data):
-        widget = CourseProgramWidget.objects.create(course=validated_data['course'])
-        programs = validated_data['programs']
-
-        for p in programs:
-            serializer = CourseProgramWidgetSerializer(data={'widget': widget.id, **p})
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-    
-        return widget
-
-
-class SignUpFormWidgetSerializer(WidgetSerializer):
-    pass
+        fields = WidgetWithChildrenSerializer.Meta.fields

@@ -12,19 +12,16 @@ const TextWidget: FC<WidgetProps<ITextWidget>> = ({
   return (
     <div className="widget text-widget">
       {isEditing ? (
-        <div className="widget-edit image-widget-edit">
-          <CKEditor
-            editor={ClassicEditor}
-            data={widget.content}
-            onChange={(event: any, editor: any) => {
-              const updatedWidget = {
-                ...widget,
-                content: editor.getData(),
-              };
-              updateWidget(updatedWidget);
-            }}
-          />
-        </div>
+        <CKEditor
+          editor={ClassicEditor}
+          data={widget.content}
+          onChange={(event: any, editor: any) => {
+            updateWidget({
+              ...widget,
+              content: editor.getData(),
+            });
+          }}
+        />
       ) : (
         <div dangerouslySetInnerHTML={{ __html: widget.content }}></div>
       )}

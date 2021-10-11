@@ -12,7 +12,6 @@ const ImageField: FC<ImageFieldProps> = ({
   resetValue = "",
 }) => {
   const loadImage = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
     if (e.target.files) {
       if (e.target.files.length > 0) {
         const image = e.target.files[0];

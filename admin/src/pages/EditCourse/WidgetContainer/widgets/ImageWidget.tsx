@@ -10,9 +10,7 @@ const ImageWidget: FC<WidgetProps<IImageWidget>> = ({
   const [image, setImage] = useState<any>("");
 
   useEffect(() => {
-    if (!widget.image.startsWith("data"))
-      setImage("data:image/jpeg;base64," + widget.image);
-    else if (widget.image) setImage(widget.image);
+    setImage(widget.image);
   }, [widget]);
 
   const loadImage = (e: ChangeEvent<HTMLInputElement>) => {

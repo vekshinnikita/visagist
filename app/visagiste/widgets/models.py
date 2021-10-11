@@ -5,7 +5,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from ckeditor.fields import RichTextField
 from core.models import Draggable, Image
 
-OPTION_ICONS = [
+FEATURES_ICONS = [
     ('CM', 'CHECK_MARK')
 ]
 
@@ -15,7 +15,7 @@ class WidgetTypes(Enum):
     TEXT_WIDGET = 'TEXT_WIDGET'
     IMAGE_WIDGET = 'IMAGE_WIDGET'
     COURSE_SCHEDULE_WIDGET = 'COURSE_SCHEDULE_WIDGET'
-    OPTIONS_WIDGET = 'OPTIONS_WIDGET'
+    FEATURES_WIDGET = 'FEATURES_WIDGET'
     COURSE_FORMATS_WIDGET = 'COURSE_FORMATS_WIDGET'
     COURSE_IMAGES_WIDGET = 'COURSE_IMAGES_WIDGET'
     COURSE_PROGRAM_WIDGET = 'COURSE_PROGRAM_WIDGET'
@@ -58,12 +58,8 @@ class CourseScheduleWidget(Widget):
     type = WidgetTypes.COURSE_SCHEDULE_WIDGET.value
 
 
-class OptionsWidget(Widget):
-    type = WidgetTypes.OPTIONS_WIDGET.value
-
-
-class CourseFormatsWidget(Widget):
-    type = WidgetTypes.COURSE_FORMATS_WIDGET.value
+class FeaturesWidget(Widget):
+    type = WidgetTypes.FEATURES_WIDGET.value
 
 
 class CourseImagesWidget(Widget):
@@ -75,35 +71,24 @@ class CourseProgramWidget(Widget):
     type = WidgetTypes.COURSE_PROGRAM_WIDGET.value
 
 
-class SignUpFormWidget(Widget):
-    type = WidgetTypes.SIGN_UP_FORM_WIDGET.value
-
-
-class CourseLessonComponent(models.Model):
+class CourseLesson(models.Model):
     widget = models.ForeignKey(CourseScheduleWidget, on_delete=models.CASCADE, related_name='lessons')
     date = models.DateTimeField()
 
 
-class OptionComponent(Draggable):
-    widget = models.ForeignKey(OptionsWidget, on_delete=models.CASCADE, related_name='options')
-    icon = models.CharField(choices=OPTION_ICONS, max_length=255)
+class Feature(Draggable):
+    widget = models.ForeignKey(FeaturesWidget, on_delete=models.CASCADE, related_name='features')
+    icon = models.CharField(choices=FEATURES_ICONS, max_length=255)
     title = models.CharField(max_length=255)
 
 
-class CourseFormatComponent(Draggable):
-    widget = models.ForeignKey(CourseFormatsWidget, on_delete=models.CASCADE, related_name='formats')
-    title = models.CharField(max_length=255)
-    text = models.TextField(blank=True)
-    price = models.PositiveIntegerField()
-
-
-class CourseProgramComponent(Draggable):
+class CourseProgramModule(Draggable):
     widget = models.ForeignKey(CourseProgramWidget, on_delete=models.CASCADE, related_name='programs')
     title = models.CharField(max_length=255)
     content = RichTextField()
 
 
 WIDGET_CLASSES = [
-    TextWidget, ImageWidget, CourseScheduleWidget, OptionsWidget, CourseFormatsWidget, CourseImagesWidget,
-    CourseProgramWidget, SignUpFormWidget
+    TextWidget, ImageWidget, CourseScheduleWidget, FeaturesWidget, CourseImagesWidget,
+    CourseProgramWidget
 ]

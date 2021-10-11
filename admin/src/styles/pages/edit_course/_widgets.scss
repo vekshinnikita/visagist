@@ -5,46 +5,6 @@
   display: flex;
   align-items: center;
   margin: 20px 0;
-
-  .actions {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    position: absolute;
-    left: -40px;
-    gap: 10px;
-    z-index: 1;
-
-    button {
-      border: none;
-      padding: 7px;
-      font-size: 15px;
-      background-color: var(--light-grey);
-      border-radius: 100px;
-      cursor: pointer;
-      outline: none;
-      transition: all 0.5s ease;
-
-      &:hover {
-        i {
-          color: var(--light-blue);
-
-          &::before {
-            color: var(--light-blue);
-          }
-        }
-      }
-
-      i {
-        transition: all 0.5s ease;
-        color: var(--grey);
-
-        &::before {
-          transition: all 0.5s ease;
-        }
-      }
-    }
-  }
 }
 
 .widget-invisible {
@@ -71,6 +31,31 @@
   width: 100%;
 }
 
+.widget-with-children {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 90px 50px 50px 50px;
+
+  .child-wrapper {
+    position: relative;
+
+    .actions {
+      position: unset;
+
+      button {
+        background: var(--slight-blue);
+      }
+    }
+  }
+}
+
+.text-widget {
+  @include disable-reset;
+}
+
 .image-widget {
   img {
     width: 100%;
@@ -81,57 +66,248 @@
   }
 }
 
-.options-widget {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-
-  .option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    font-weight: 600;
+.features-widget {
+  .feature-wrapper {
     width: calc(100% / 4);
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    justify-content: center;
 
-    input {
-      width: 70%;
-    }
-
-    i {
-      background: var(--slight-blue);
-      border-radius: 100%;
-      width: 40px;
-      height: 40px;
+    .child {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-bottom: 10px;
-      font-size: 20px;
-    }
+      border-radius: 100%;
+      font-weight: 600;
 
-    h3 {
-      text-align: center;
-      width: 100px;
-    }
-  }
+      input {
+        width: 70%;
+      }
 
-  .create-option {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    background: var(--slight-blue);
-    border: 2px dashed var(--light-blue);
-    color: var(--light-blue);
-    margin-top: 30px;
-    cursor: pointer;
+      i {
+        background: var(--slight-blue);
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      h3 {
+        text-align: center;
+        width: 100px;
+      }
+    }
   }
 }
 
-.text-widget {
-  @include disable-reset;
+.formats-widget {
+  .format-wrapper {
+    width: calc(100% / 3);
+    padding-bottom: 20px;
+    padding: 0 10px;
+
+    .actions {
+      flex-direction: row;
+      margin: auto;
+      padding: 10px 0;
+    }
+
+    .format {
+      background: var(--slight-blue);
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+
+      > h3 {
+        font-size: 22px;
+        font-weight: 600;
+        padding-bottom: 15px;
+      }
+
+      > p {
+        font-size: 14px;
+        font-weight: 600;
+        padding-bottom: 15px;
+      }
+
+      > div {
+        @include disable-reset;
+        padding-bottom: 15px;
+      }
+
+      > h4 {
+        font-size: 22px;
+        font-weight: 600;
+      }
+
+      input {
+        &:nth-child(1) {
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}
+
+.course-images-widget {
+  .course-image-wrapper {
+    width: calc(100% / 3);
+    padding-bottom: 20px;
+    padding: 0 10px;
+
+    .actions {
+      flex-direction: row;
+      margin: auto;
+      padding: 10px 0;
+
+      button {
+        background: var(--slight-blue);
+      }
+    }
+
+    .child {
+      img {
+        width: 100%;
+      }
+
+      .image-field {
+        height: 150px;
+      }
+    }
+  }
+}
+
+.course-programs-widget {
+  padding: 50px;
+  gap: 20px;
+
+  .course-program-module-wrapper {
+    width: 100%;
+    padding-bottom: 20px;
+    padding: 0 10px;
+
+    .actions {
+      flex-direction: row;
+      margin: auto;
+      padding: 10px 0;
+
+      button {
+        background: var(--slight-blue);
+      }
+    }
+
+    .child {
+      background: var(--slight-blue);
+      border-radius: 10px;
+      padding: 10px;
+
+      h3 {
+        font-size: 22px;
+        font-weight: 600;
+        padding-bottom: 10px;
+      }
+
+      input {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
+
+.scheduler-widget {
+  width: 100%;
+  padding: 50px;
+  gap: 20px;
+
+  .lesson-wrapper {
+    width: 100%;
+
+    .actions {
+      flex-direction: row;
+      margin: auto;
+      padding: 10px 0;
+
+      button {
+        background: var(--slight-blue);
+      }
+    }
+
+    .child {
+      display: flex;
+      font-size: 22px;
+      justify-content: center;
+      background: var(--slight-blue);
+      border-radius: 10px;
+      padding: 10px;
+
+      h3 {
+        &:nth-child(1) {
+          padding-right: 40px;
+        }
+      }
+    }
+  }
+}
+
+.create-child {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: var(--slight-blue);
+  border: 2px dashed var(--light-blue);
+  color: var(--light-blue);
+  margin: 10px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: absolute;
+  left: -40px;
+  gap: 10px;
+  z-index: 1;
+
+  button {
+    border: none;
+    padding: 7px;
+    font-size: 15px;
+    background-color: var(--light-grey);
+    border-radius: 100px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.5s ease;
+
+    &:hover {
+      i {
+        color: var(--light-blue);
+
+        &::before {
+          color: var(--light-blue);
+        }
+      }
+    }
+
+    i {
+      transition: all 0.5s ease;
+      color: var(--grey);
+
+      &::before {
+        transition: all 0.5s ease;
+      }
+    }
+  }
 }

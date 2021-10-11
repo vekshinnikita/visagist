@@ -8,10 +8,8 @@ WIDGET_SERIALIZERS = {
     WidgetTypes.BASE_WIDGET.value: widgets_serializers.WidgetSerializer,
     WidgetTypes.TEXT_WIDGET.value: widgets_serializers.TextWidgetSerializer,
     WidgetTypes.IMAGE_WIDGET.value: widgets_serializers.ImageWidgetSerializer,
-    WidgetTypes.OPTIONS_WIDGET.value: widgets_serializers.OptionsWidgetSerializer,
-    WidgetTypes.SIGN_UP_FORM_WIDGET.value: widgets_serializers.SignUpFormWidgetSerializer,
+    WidgetTypes.FEATURES_WIDGET.value: widgets_serializers.FeaturesWidgetSerializer,
     WidgetTypes.COURSE_SCHEDULE_WIDGET.value: widgets_serializers.CourseScheduleWidgetSerializer,
-    WidgetTypes.COURSE_FORMATS_WIDGET.value: widgets_serializers.CourseFormatsWidgetSerializer,
     WidgetTypes.COURSE_IMAGES_WIDGET.value: widgets_serializers.CourseImagesWidgetSerializer,
     WidgetTypes.COURSE_PROGRAM_WIDGET.value: widgets_serializers.CourseProgramWidgetSerializer
 }

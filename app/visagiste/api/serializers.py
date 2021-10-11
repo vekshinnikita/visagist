@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from drf_extra_fields.fields import Base64ImageField
+from core.serializers import Base64ImageField
 from widgets.models import Widget
 from widgets.utils import serialize_widget, clear_course_widgets, create_course_widgets
 from widgets.serializers.fields import WidgetField

@@ -71,7 +71,7 @@ aside.widgets-nav {
           }
         }
 
-        .options-widget-icon {
+        .features-widget-icon {
           div {
             background: var(--light-blue);
           }
@@ -112,6 +112,8 @@ aside.widgets-nav {
 
       h4 {
         padding-top: 10px;
+        width: 100px;
+        text-align: center;
       }
 
       .widget-icon {
@@ -167,7 +169,7 @@ aside.widgets-nav {
         }
       }
 
-      .options-widget-icon {
+      .features-widget-icon {
         padding: 10px;
         display: flex;
         gap: 5px;

@@ -40,28 +40,15 @@ const CourseScheduleWidgetIcon: FC = () => {
   );
 };
 
-const OptionsWidgetIcon: FC = () => {
+const FeaturesWidgetIcon: FC = () => {
   return (
     <div className="widget-icon-container">
-      <div className="widget-icon options-widget-icon">
+      <div className="widget-icon features-widget-icon">
         <div></div>
         <div></div>
         <div></div>
       </div>
-      <h4>Опции</h4>
-    </div>
-  );
-};
-
-const CourseFormatsWidgetIcon: FC = () => {
-  return (
-    <div className="widget-icon-container">
-      <div className="widget-icon course-formats-widget-icon">
-        <div>10$</div>
-        <div>20$</div>
-        <div>30$</div>
-      </div>
-      <h4>Форматы обучения</h4>
+      <h4>Особенности</h4>
     </div>
   );
 };
@@ -92,19 +79,7 @@ const CourseProgramWidgetIcon: FC = () => {
           <div></div>
         </div>
       </div>
-      <h4>Программы</h4>
-    </div>
-  );
-};
-
-const SignUpFormWidgetIcon: FC = () => {
-  return (
-    <div className="widget-icon-container">
-      <div className="widget-icon sign-up-widget-icon">
-        <div>Name</div>
-        <div>Submit</div>
-      </div>
-      <h4>Форма</h4>
+      <h4>Модули Программы Обучения</h4>
     </div>
   );
 };
@@ -117,11 +92,9 @@ const WidgetsNav: FC = () => {
         <TextWidgetIcon />
         <ImageWidgetIcon />
         <CourseScheduleWidgetIcon />
-        <OptionsWidgetIcon />
-        <CourseFormatsWidgetIcon />
+        <FeaturesWidgetIcon />
         <CourseImagesWidgetIcon />
         <CourseProgramWidgetIcon />
-        <SignUpFormWidgetIcon />
       </div>
     </aside>
   );

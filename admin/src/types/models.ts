@@ -4,7 +4,7 @@ export interface Draggable {
   position: number;
 }
 
-export interface Image {
+export interface Image extends Draggable {
   id: number;
   image: any;
 }
@@ -14,20 +14,13 @@ export interface CourseLesson {
   date: string;
 }
 
-export interface Option extends Draggable {
+export interface Feature extends Draggable {
   id: number;
   icon: IconTypes;
   title: string;
 }
 
-export interface CourseFormat extends Draggable {
-  id: number;
-  title: string;
-  text: string;
-  price: number;
-}
-
-export interface CourseProgram extends Draggable {
+export interface CourseProgramModule extends Draggable {
   id: number;
   title: string;
   content: string;
@@ -39,6 +32,10 @@ export interface Widget extends Draggable {
   is_visible: boolean;
 }
 
+export interface WidgetWithChildren<T> extends Widget {
+  children: T[];
+}
+
 export interface TextWidget extends Widget {
   content: string;
 }
@@ -47,25 +44,15 @@ export interface ImageWidget extends Widget {
   image: any;
 }
 
-export interface CourseScheduleWidget extends Widget {
-  lessons: CourseLesson[];
-}
+export interface CourseScheduleWidget
+  extends WidgetWithChildren<CourseLesson> {}
 
-export interface OptionsWidget extends Widget {
-  options: Option[];
-}
+export interface FeaturesWidget extends WidgetWithChildren<Feature> {}
 
-export interface CourseFormatsWidget extends Widget {
-  formats: CourseFormat[];
-}
+export interface CourseImagesWidget extends WidgetWithChildren<Image> {}
 
-export interface CourseImagesWidget extends Widget {
-  images: Image[];
-}
-
-export interface CourseProgramWidget extends Widget {
-  programs: CourseProgram[];
-}
+export interface CourseProgramWidget
+  extends WidgetWithChildren<CourseProgramModule> {}
 
 export interface Course extends Draggable {
   id: number;

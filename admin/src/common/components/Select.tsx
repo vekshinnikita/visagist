@@ -1,11 +1,20 @@
-import { FC } from "react";
+import { Children, FC, isValidElement, ReactNode } from "react";
 
-export const Option: FC = () => {
+interface SelectOptionProps {
+  default?: boolean | undefined;
+}
+
+export const SelectOption: FC<SelectOptionProps> = () => {
   return <div className="option"></div>;
 };
 
 export const Select: FC = ({ children }) => {
-  const defaultOption = children?.toString();
+  let defaultOptionNode: ReactNode = null;
+  Children.forEach(children, (element) => {
+    if (!isValidElement(element)) return;
 
-  return <div className="select"></div>;
+    defaultOptionNode = element.props.default ? element : null;
+  });
+
+  return <div className="select">{defaultOptionNode}</div>;
 };
