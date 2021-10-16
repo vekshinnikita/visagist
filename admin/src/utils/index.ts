@@ -120,3 +120,17 @@ export const stringifyDate = (date: Date) => {
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
 };
+
+export const getPositionForNewChild = (items: Draggable[]) =>
+  Math.max(...items.map((i) => i.position), 0) + 1;
+
+export const getIdForNewChild = (items: { id: number }[]) =>
+  Math.max(...items.map((i) => i.id), 0) + 1;
+
+export const fixWidgetsSequence = (widgets: Widget[]) => {
+  while (widgets[0].position < 0) {
+    widgets.map((w) => w.position++);
+  }
+  console.log(widgets);
+  return widgets;
+};

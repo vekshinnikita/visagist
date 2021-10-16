@@ -1,4 +1,4 @@
-import { CoursesSections, Pages } from "./enumerates";
+import { CoursesSections, Pages, WidgetTypes } from "./enumerates";
 import { CourseDetails, Course } from "./models";
 
 export interface CoursesState {
@@ -15,6 +15,7 @@ export interface CoursesState {
 export interface ComponentsState {
   page: Pages;
   coursesSection: CoursesSections;
+  isDraggingWidget: boolean;
 }
 
 export interface RootState {

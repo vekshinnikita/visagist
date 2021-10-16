@@ -1,9 +1,9 @@
 import * as types from "./widget.types";
 import * as constants from "./widget.constants";
 
-export const deleteWidget: types.DeleteWidget = (widgetId) => ({
+export const deleteWidget: types.DeleteWidget = (widget) => ({
   type: constants.DELETE_WIDGET,
-  widgetId,
+  widget,
 });
 
 export const createWidget: types.CreateWidget = (widget) => ({

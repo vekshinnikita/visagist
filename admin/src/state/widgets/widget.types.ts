@@ -3,7 +3,7 @@ import * as constants from "./widget.constants";
 
 type DeleteWidgetValue = {
   type: typeof constants.DELETE_WIDGET;
-  widgetId: number;
+  widget: Widget;
 };
 
 type CreateWidgetValue = {
@@ -32,7 +32,7 @@ type RevealWidgetValue = {
   widgetId: number;
 };
 
-export type DeleteWidget = (widgetId: number) => DeleteWidgetValue;
+export type DeleteWidget = (widget: Widget) => DeleteWidgetValue;
 export type CreateWidget = (widget: Widget) => CreateWidgetValue;
 export type UpdateWidget = (widget: Widget) => UpdateWidgetValue;
 export type MoveWidget = (

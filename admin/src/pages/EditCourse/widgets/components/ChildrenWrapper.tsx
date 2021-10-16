@@ -1,7 +1,11 @@
 import { FC } from "react";
-import { sortDraggableByPosition } from "@/utils";
-import { Draggable, WidgetWithChildren } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer";
+import {
+  getIdForNewChild,
+  getPositionForNewChild,
+  sortDraggableByPosition,
+} from "@/utils";
+import { WidgetWithChildren } from "@/types/models";
+import { WidgetProps } from "../../WidgetContainer/WidgetContainer";
 import CreateChild from "./CreateChild";
 
 export interface ChildComponentProps<T> {
@@ -23,12 +27,6 @@ const ChildrenWrapper: FC<ChildrenWrapperProps> = ({
   isEditing,
   updateWidget,
 }) => {
-  const getPositionForNewChild = (items: Draggable[]) =>
-    Math.max(...items.map((i) => i.position), 0) + 1;
-
-  const getIdForNewChild = (items: { id: number }[]) =>
-    Math.max(...items.map((i) => i.id), 0) + 1;
-
   const removeImage = (child: any) => {
     updateWidget({
       ...widget,

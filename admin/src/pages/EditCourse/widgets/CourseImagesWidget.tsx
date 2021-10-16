@@ -3,12 +3,12 @@ import {
   CourseImagesWidget as ICourseImagesWidget,
   Image as CourseImage,
 } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer";
+import { WidgetProps } from "../WidgetContainer/WidgetContainer";
 import ImageField from "@/common/components/ImageField";
 import ChildrenWrapper, {
   ChildComponentProps,
-} from "../components/ChildrenWrapper";
-import Child from "../components/Child";
+} from "./components/ChildrenWrapper";
+import Child from "./components/Child";
 
 const Image: FC<ChildComponentProps<CourseImage>> = ({
   child: courseImage,
@@ -59,5 +59,16 @@ const CourseImagesWidget: FC<WidgetProps<ICourseImagesWidget>> = ({
     </div>
   );
 };
+
+export const CourseImagesWidgetIcon: FC = () => (
+  <div className="widget-icon-container">
+    <div className="widget-icon course-images-widget-icon">
+      <div>Img</div>
+      <div>Img</div>
+      <div>Img</div>
+    </div>
+    <h4>Изображения</h4>
+  </div>
+);
 
 export default CourseImagesWidget;

@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import { ImageWidget as IImageWidget } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer";
+import { WidgetProps } from "../WidgetContainer/WidgetContainer";
 
 const ImageWidget: FC<WidgetProps<IImageWidget>> = ({
   widget,
@@ -58,5 +58,12 @@ const ImageWidget: FC<WidgetProps<IImageWidget>> = ({
     </div>
   );
 };
+
+export const ImageWidgetIcon: FC = () => (
+  <div className="widget-icon-container">
+    <div className="widget-icon image-widget-icon">Img</div>
+    <h4>Изображение</h4>
+  </div>
+);
 
 export default ImageWidget;

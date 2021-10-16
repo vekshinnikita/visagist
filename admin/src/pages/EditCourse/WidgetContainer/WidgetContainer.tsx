@@ -7,22 +7,27 @@ import {
   updateWidget,
 } from "@/state/widgets";
 import { WidgetTypes } from "@/types/enumerates";
-import ImageWidget from "./widgets/ImageWidget";
-import TextWidget from "./widgets/TextWidget";
 import Actions, {
   DeleteAction,
   HideRevealAction,
-} from "@/pages/EditCourse/WidgetContainer/components/Actions";
-import CourseImagesWidget from "./widgets/CourseImagesWidget";
-import CourseProgramWidget from "./widgets/CourseProgramWidget";
-import FeaturesWidget from "./widgets/FeaturesWidget";
-import CourseSchedulerWidget from "./widgets/CourseSchedulerWidget";
+} from "../widgets/components/Actions";
+import TextWidget from "../widgets/TextWidget";
+import ImageWidget from "../widgets/ImageWidget";
+import CourseImagesWidget from "../widgets/CourseImagesWidget";
+import CourseProgramWidget from "../widgets/CourseProgramWidget";
+import FeaturesWidget from "../widgets/FeaturesWidget";
+import CourseSchedulerWidget from "../widgets/CourseSchedulerWidget";
+import { Draggable } from "react-beautiful-dnd";
 
 interface WidgetContainerProps {
   widget: any;
+  index: number;
 }
 
-export const WidgetContainer: FC<WidgetContainerProps> = ({ widget }) => {
+export const WidgetContainer: FC<WidgetContainerProps> = ({
+  widget,
+  index,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [widgetPreSaveState, setWidgetPreSaveState] = useState(widget);
   const dispatch = useDispatch();
@@ -38,30 +43,37 @@ export const WidgetContainer: FC<WidgetContainerProps> = ({ widget }) => {
   };
 
   return (
-    <div
-      className={
-        "widget-container" + (widget.is_visible ? "" : " widget-invisible")
-      }
-    >
-      <Actions
-        isEditing={isEditing}
-        setIsEditing={setIsEditing}
-        submit={submitChanges}
-        cancel={cancelChanges}
-      >
-        <HideRevealAction
-          isVisible={widget.is_visible}
-          hide={() => dispatch(hideWidget(widget.id))}
-          reveal={() => dispatch(revealWidget(widget.id))}
-        />
-        <DeleteAction action={() => dispatch(deleteWidget(widget.id))} />
-      </Actions>
-      <Widget
-        widget={widgetPreSaveState}
-        isEditing={isEditing}
-        updateWidget={(widget) => setWidgetPreSaveState(widget)}
-      />
-    </div>
+    <Draggable draggableId={`${widget.id}`} index={index}>
+      {(provided) => (
+        <div
+          className={
+            "widget-container" + (widget.is_visible ? "" : " widget-invisible")
+          }
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <Actions
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            submit={submitChanges}
+            cancel={cancelChanges}
+          >
+            <HideRevealAction
+              isVisible={widget.is_visible}
+              hide={() => dispatch(hideWidget(widget.id))}
+              reveal={() => dispatch(revealWidget(widget.id))}
+            />
+            <DeleteAction action={() => dispatch(deleteWidget(widget))} />
+          </Actions>
+          <Widget
+            widget={widgetPreSaveState}
+            isEditing={isEditing}
+            updateWidget={(widget) => setWidgetPreSaveState(widget)}
+          />
+        </div>
+      )}
+    </Draggable>
   );
 };
 
