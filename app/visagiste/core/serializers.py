@@ -31,7 +31,7 @@ class DraggableSerializer(serializers.ModelSerializer):
         fields = ['id', 'position']
 
 
-class ImageRetriveSerializer(DraggableSerializer):
+class Base64ImageRetriveSerializer(DraggableSerializer):
     image = Base64ImageField(required=False, allow_null=True, default=None, represent_in_base64=True)
 
     class Meta:
@@ -39,12 +39,17 @@ class ImageRetriveSerializer(DraggableSerializer):
         fields = ['image'] + DraggableSerializer.Meta.fields
 
 
-class ImageSerializer(ImageRetriveSerializer):
+class Base64ImageSerializer(Base64ImageRetriveSerializer):
     class Meta:
         model = Image
-        fields = ['content_type', 'object_id'] + ImageRetriveSerializer.Meta.fields
+        fields = ['content_type', 'object_id'] + Base64ImageRetriveSerializer.Meta.fields
         extra_kwargs = {'content_type': {'required': False}, 'object_id': {'required': False}, 'image': {'required': False}}
     
     def to_representation(self, instance):
-        return ImageRetriveSerializer(instance).data
+        return Base64ImageRetriveSerializer(instance).data
 
+
+class ImageSerializer(DraggableSerializer):
+    class Meta:
+        model = Image
+        fields = ['image'] + DraggableSerializer.Meta.fields

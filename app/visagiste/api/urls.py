@@ -4,11 +4,12 @@ from . import views
 
 router = DefaultRouter()
 
-router.register(r'courses', views.AdminCourseViewSet, basename='courses')
+router.register(r'courses', views.CourseViewSet, basename='courses')
+router.register(r'admin/courses', views.AdminCourseViewSet, basename='courses_admin')
 
 urlpatterns = [
-    path('courses/hide/', views.hide_courses, name='hide_courses'),
-    path('courses/reveal/', views.reveal_courses, name='reveal_courses'),
-    path('courses/delete/', views.delete_courses, name='delete_courses'),
+    path('admin/courses/hide/', views.hide_courses, name='hide_courses'),
+    path('admin/courses/reveal/', views.reveal_courses, name='reveal_courses'),
+    path('admin/courses/delete/', views.delete_courses, name='delete_courses'),
     path('', include(router.urls)),
 ]

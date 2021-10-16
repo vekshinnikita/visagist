@@ -2,7 +2,6 @@ import { CourseDetails, Widget } from "@/types/models";
 import { ActionsReturnValues } from "./widget.types";
 import * as constants from "./widget.constants";
 import {
-  fixWidgetsSequence,
   getWidget,
   getWidgetsListWithoutSpecificOne,
   sortDraggableByPosition,
