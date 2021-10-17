@@ -1,5 +1,9 @@
 import { RootState } from "@/types";
 
+// Auth
+export const selectIsAuth = (state: RootState) => state.auth.isAuth;
+export const selectIsAuthLoading = (state: RootState) => state.auth.isLoading;
+
 // Components
 export const selectCurrentPage = (state: RootState) => state.components.page;
 export const selectCurrentCoursesSection = (state: RootState) =>

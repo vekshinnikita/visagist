@@ -54,6 +54,12 @@
 
 .text-widget {
   @include disable-reset;
+
+  > div {
+    background: var(--slight-blue);
+    border-radius: 10px;
+    padding: 10px;
+  }
 }
 
 .image-widget {
@@ -215,6 +221,10 @@
 
       input {
         margin-bottom: 15px;
+      }
+
+      > div {
+        @include disable-reset;
       }
     }
   }

@@ -1,5 +1,6 @@
 import base64
 from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework import serializers
 from drf_extra_fields.fields import Base64FieldMixin, Base64ImageField
 from .models import Image, Draggable
@@ -20,7 +21,7 @@ class Base64ImageField(Base64ImageField):
             return super(Base64FieldMixin, self).to_representation(file)
 
     def to_internal_value(self, base64_data):
-        if isinstance(base64_data, ContentFile):
+        if isinstance(base64_data, ContentFile) or isinstance(base64_data, SimpleUploadedFile):
             return super(Base64FieldMixin, self).to_internal_value(base64_data)
         return super().to_internal_value(base64_data)
 

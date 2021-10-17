@@ -18,7 +18,13 @@ export interface ComponentsState {
   isDraggingWidget: boolean;
 }
 
+export interface AuthState {
+  isAuth: boolean;
+  isLoading: boolean;
+}
+
 export interface RootState {
+  auth: AuthState;
   courses: CoursesState;
   components: ComponentsState;
 }
