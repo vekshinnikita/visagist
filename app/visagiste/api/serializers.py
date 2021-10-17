@@ -20,7 +20,10 @@ class CourseRetriveSerializer(ShortCourseRetriveSerializer):
         fields = ['widgets'] + ShortCourseRetriveSerializer.Meta.fields
 
     def get_widgets(self, course: Course):
-        return [serialize_widget(widget, self.context) for widget in Widget.objects.get_course_widgets(course.id)]
+        return [
+            serialize_widget(widget, self.context) for widget in Widget.objects.get_course_widgets(course.id)
+            if widget.is_visible
+        ]
 
 
 class Base64CourseRetriveSerializer(ShortCourseRetriveSerializer):

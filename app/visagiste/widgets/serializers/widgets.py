@@ -24,7 +24,7 @@ class Base64ImageWidgetSerializer(WidgetSerializer):
         fields = ['image'] + WidgetSerializer.Meta.fields
 
 
-class ImageWidgetSerializer(WidgetManager):
+class ImageWidgetSerializer(WidgetSerializer):
     class Meta:
         model = ImageWidget
         fields = ['image'] + WidgetSerializer.Meta.fields

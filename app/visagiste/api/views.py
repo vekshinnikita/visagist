@@ -17,6 +17,9 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     def list(self, request, *args, **kwargs):
         serializer = self.get_serializer(self.get_queryset(), context={"request": request}, many=True)        
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(is_visible=True)
 
 
 class AdminCourseViewSet(viewsets.ModelViewSet):
