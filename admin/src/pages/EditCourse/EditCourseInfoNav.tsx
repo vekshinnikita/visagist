@@ -1,20 +1,24 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import { CourseDetails } from "@/types/models";
 import ImageField from "@/common/components/ImageField";
+import { useHistory } from "react-router";
 
 interface EditCourseInfoNavProps {
   course: CourseDetails;
   updateCourse: (course: CourseDetails) => void;
+  deleteCourse: (courseId: number) => void;
 }
 
 const EditCourseInfoNav: FC<EditCourseInfoNavProps> = ({
   course,
   updateCourse,
+  deleteCourse,
 }) => {
   const [title, setTitle] = useState(course.title);
   const [position, setPosition] = useState(course.position);
   const [isVisible, setIsVisible] = useState(course.is_visible);
   const [courseImage, setCourseImage] = useState<any>("");
+  const history = useHistory();
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,6 +31,12 @@ const EditCourseInfoNav: FC<EditCourseInfoNavProps> = ({
       id: course.id,
     };
     updateCourse(updatedCourse);
+  };
+
+  const handleDeleteCourse = () => {
+    if (!window.confirm("Вы действительно хотите удалить этот курс?")) return;
+    deleteCourse(course.id);
+    history.push("/courses/");
   };
 
   useEffect(() => {
@@ -69,7 +79,11 @@ const EditCourseInfoNav: FC<EditCourseInfoNavProps> = ({
         <button type="submit" className="button">
           Сохранить
         </button>
-        <button type="button" className="button button-red">
+        <button
+          type="button"
+          className="button button-red"
+          onClick={handleDeleteCourse}
+        >
           Удалить
         </button>
       </form>

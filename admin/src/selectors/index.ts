@@ -19,3 +19,7 @@ export const selectCurrentCourse = (state: RootState) =>
   state.courses.currentCourse;
 export const selectCurrentCourseWidgets = (state: RootState) =>
   state.courses.currentCourse.widgets;
+export const selectIsCourseCreateLoading = (state: RootState) =>
+  state.courses.createCourseIsLoading;
+export const selectIsBulkActionsLoading = (state: RootState) =>
+  state.courses.bulkActionsIsLoading;

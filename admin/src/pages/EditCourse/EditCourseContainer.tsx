@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { getCurrentCourse, updateCourse } from "@/state/courses";
+import { deleteCourse, getCurrentCourse, updateCourse } from "@/state/courses";
 import { createWidget, moveWidget } from "@/state/widgets";
 import { selectCurrentCourse } from "@/selectors";
 import { getIdForNewChild } from "@/utils";
@@ -56,6 +56,7 @@ const EditCourseContainer: FC = () => {
           updateCourse={(course: CourseDetails) =>
             dispatch(updateCourse(course))
           }
+          deleteCourse={(courseId: number) => dispatch(deleteCourse(courseId))}
         />
         <Workspace widgets={course.widgets} />
         <WidgetsNav />

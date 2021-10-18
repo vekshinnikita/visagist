@@ -1,6 +1,7 @@
 import { FC, ChangeEvent } from "react";
 import { useInput } from "@/hooks";
 import { SignInData } from "@/types/models";
+import { LoadingMask } from "@/common/components/Loading";
 
 interface SignInProps {
   isLoading: boolean;
@@ -43,6 +44,7 @@ const SignIn: FC<SignInProps> = ({ isLoading, signIn }) => {
         />
         <button type="submit" className="button">
           Войти
+          {isLoading && <LoadingMask />}
         </button>
       </form>
     </main>
