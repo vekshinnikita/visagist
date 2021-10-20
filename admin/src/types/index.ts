@@ -23,8 +23,13 @@ export interface AuthState {
   isLoading: boolean;
 }
 
+export interface AlertState {
+  message: string;
+}
+
 export interface RootState {
   auth: AuthState;
   courses: CoursesState;
   components: ComponentsState;
+  alert: AlertState;
 }

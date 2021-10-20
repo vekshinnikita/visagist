@@ -1,5 +1,8 @@
 import { RootState } from "@/types";
 
+// Alert
+export const selectAlertMessage = (state: RootState) => state.alert.message;
+
 // Auth
 export const selectIsAuth = (state: RootState) => state.auth.isAuth;
 export const selectIsAuthLoading = (state: RootState) => state.auth.isLoading;
