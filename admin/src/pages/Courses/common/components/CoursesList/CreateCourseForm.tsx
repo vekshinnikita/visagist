@@ -2,6 +2,9 @@ import { ChangeEvent, FC, useState } from "react";
 import { useInput } from "@/hooks";
 import { CourseDetails } from "@/types/models";
 import ImageField from "@/common/components/ImageField";
+import { useSelector } from "react-redux";
+import { selectIsCourseCreateLoading } from "@/selectors";
+import { LoadingMask } from "@/common/components/Loading";
 
 interface CreateCourseFormProps {
   createCourse: (course: CourseDetails) => void;
@@ -18,6 +21,7 @@ export const CreateCourseForm: FC<CreateCourseFormProps> = ({
   } = useInput();
   const [isVisible, setIsVisible] = useState(true);
   const [loadedImage, setLoadedImage] = useState<any>("");
+  const isLoading = useSelector(selectIsCourseCreateLoading);
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,6 +71,7 @@ export const CreateCourseForm: FC<CreateCourseFormProps> = ({
         <ImageField value={loadedImage} setValue={setLoadedImage} />
         <button type="submit" className="button">
           Создать
+          {isLoading && <LoadingMask />}
         </button>
       </form>
     </div>

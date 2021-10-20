@@ -105,8 +105,11 @@ env/
 .DS_Store
 *.sqlite3
 media/
-shopApp/static/
-migrations/
+static/
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
 *.pyc
 *.db
 *.pid

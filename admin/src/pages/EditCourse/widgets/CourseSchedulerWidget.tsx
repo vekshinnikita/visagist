@@ -4,12 +4,12 @@ import {
   CourseLesson,
   CourseScheduleWidget as ICourseSchedulerWidget,
 } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer";
+import { checkDateTimeFormat, stringifyDate } from "@/utils";
+import { WidgetProps } from "../WidgetContainer/WidgetContainer";
 import ChildrenWrapper, {
   ChildComponentProps,
-} from "../components/ChildrenWrapper";
-import Child from "../components/Child";
-import { checkDateTimeFormat, stringifyDate } from "@/utils";
+} from "./components/ChildrenWrapper";
+import Child from "./components/Child";
 
 const Lesson: FC<ChildComponentProps<CourseLesson>> = ({
   child: lesson,
@@ -93,5 +93,25 @@ const CourseSchedulerWidget: FC<WidgetProps<ICourseSchedulerWidget>> = ({
     </div>
   );
 };
+
+export const CourseScheduleWidgetIcon = () => (
+  <div className="widget-icon-container">
+    <div className="widget-icon course-schedule-widget-icon">
+      <div>
+        <div>01</div>
+        <div></div>
+      </div>
+      <div>
+        <div>18</div>
+        <div></div>
+      </div>
+      <div>
+        <div>21</div>
+        <div></div>
+      </div>
+    </div>
+    <h4>Расписание</h4>
+  </div>
+);
 
 export default CourseSchedulerWidget;

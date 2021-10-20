@@ -7,6 +7,7 @@ class Draggable(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['position']
 
 
 class Image(Draggable):

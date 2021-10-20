@@ -1,84 +1,81 @@
-// import axios, { AxiosResponse, AxiosError } from "axios";
-// import { SERVER_URL } from "@/env";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { SERVER_URL } from "@/env";
 import { Draggable, Widget } from "@/types/models";
 
 export const getAccessToken = () => localStorage.getItem("access_token");
 export const getRefreshToken = () => localStorage.getItem("refresh_token");
 
-export const axiosAPI = axios;
+export const axiosAPI = axios.create({
+  headers: {
+    Authorization: "Bearer " + getAccessToken(),
+  },
+});
 
-// export const axiosAPI = axios.create({
-//   headers: {
-//     Authorization: "Bearer " + getAccessToken(),
-//   },
-// });
+axiosAPI.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  (error: AxiosError) => {
+    const originalRequest = error.config;
+    const refreshUrl = SERVER_URL + "/api/token/refresh/";
 
-// axiosAPI.interceptors.response.use(
-//   (response: AxiosResponse) => response,
-//   (error: AxiosError) => {
-//     const originalRequest = error.config;
-//     const refreshUrl = SERVER_URL + "/api/auth/token/refresh/";
+    if (error.response) {
+      if (error.response.status === 401 && originalRequest.url === refreshUrl) {
+        window.location.href = "/sign_in/";
+        return Promise.reject(error);
+      }
 
-//     if (error.response) {
-//       if (error.response.status === 401 && originalRequest.url === refreshUrl) {
-//         window.location.href = "/sign_in/";
-//         return Promise.reject(error);
-//       }
+      if (
+        error.response.data.code === "token_not_valid" &&
+        error.response.status === 401 &&
+        error.response.statusText === "Unauthorized"
+      ) {
+        const refreshToken = getRefreshToken();
 
-//       if (
-//         error.response.data.code === "token_not_valid" &&
-//         error.response.status === 401 &&
-//         error.response.statusText === "Unauthorized"
-//       ) {
-//         const refreshToken = getRefreshToken();
+        if (refreshToken) {
+          const tokenParts: { exp: number } = JSON.parse(
+            atob(refreshToken.split(".")[1])
+          );
 
-//         if (refreshToken) {
-//           const tokenParts: { exp: number } = JSON.parse(
-//             atob(refreshToken.split(".")[1])
-//           );
+          const now: number = Math.ceil(Date.now() / 1000);
 
-//           const now: number = Math.ceil(Date.now() / 1000);
+          if (tokenParts.exp > now) {
+            return axiosAPI
+              .post(refreshUrl, { refresh: refreshToken })
+              .then((response: AxiosResponse) => {
+                setNewHeaders(response);
+                originalRequest.headers["Authorization"] =
+                  "Bearer " + response.data.access;
 
-//           if (tokenParts.exp > now) {
-//             return axiosAPI
-//               .post(refreshUrl, { refresh: refreshToken })
-//               .then((response: AxiosResponse) => {
-//                 setNewHeaders(response);
-//                 originalRequest.headers["Authorization"] =
-//                   "Bearer " + response.data.access;
+                return axiosAPI(originalRequest);
+              })
+              .catch((error: AxiosError) => {
+                console.log(error);
+              });
+          } else {
+            console.log("Refresh token is expired", tokenParts.exp, now);
+            window.location.href = "/sign_in/";
+          }
+        } else {
+          console.log("Refresh token not available.");
+          window.location.href = "/sign_in/";
+        }
+      }
+    }
 
-//                 return axiosAPI(originalRequest);
-//               })
-//               .catch((error: AxiosError) => {
-//                 console.log(error);
-//               });
-//           } else {
-//             console.log("Refresh token is expired", tokenParts.exp, now);
-//             window.location.href = "/sign_in/";
-//           }
-//         } else {
-//           console.log("Refresh token not available.");
-//           window.location.href = "/sign_in/";
-//         }
-//       }
-//     }
+    return Promise.reject(error);
+  }
+);
 
-//     return Promise.reject(error);
-//   }
-// );
+export const setNewHeaders = (response: AxiosResponse) => {
+  axiosAPI.defaults.headers["Authorization"] = "Bearer " + response.data.access;
+  localStorage.setItem("access_token", response.data.access);
+  localStorage.setItem("refresh_token", response.data.refresh);
+};
 
-// export const setNewHeaders = (response: AxiosResponse) => {
-//   axiosAPI.defaults.headers["Authorization"] = "Bearer " + response.data.access;
-//   localStorage.setItem("access_token", response.data.access);
-//   localStorage.setItem("refresh_token", response.data.refresh);
-// };
-
-// export const removeHeaders = () => {
-//   localStorage.removeItem("access_token");
-//   localStorage.removeItem("refresh_token");
-//   axiosAPI.defaults.headers["Authentication"] = undefined;
-// };
+export const removeHeaders = () => {
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
+  axiosAPI.defaults.headers["Authentication"] = undefined;
+};
 
 export const getWidgetsListWithoutSpecificOne = (
   widgets: Widget[],
@@ -119,4 +116,14 @@ export const stringifyDate = (date: Date) => {
   timezone = timezone.startsWith("-") ? timezone : "+" + timezone;
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
+<<<<<<< HEAD
 };
+=======
+};
+
+export const getPositionForNewChild = (items: Draggable[]) =>
+  Math.max(...items.map((i) => i.position), 0) + 1;
+
+export const getIdForNewChild = (items: { id: number }[]) =>
+  Math.max(...items.map((i) => i.id), 0) + 1;
+>>>>>>> fe3df1cba9ae51b3eb35eebf923a2a4972e7ebe9

@@ -25,7 +25,7 @@
 }
 
 .widget {
-  padding: 50px;
+  padding: 80px 50px 80px 50px;
   background: var(--light-grey);
   border-radius: 10px;
   width: 100%;
@@ -54,6 +54,12 @@
 
 .text-widget {
   @include disable-reset;
+
+  > div {
+    background: var(--slight-blue);
+    border-radius: 10px;
+    padding: 10px;
+  }
 }
 
 .image-widget {
@@ -216,6 +222,10 @@
       input {
         margin-bottom: 15px;
       }
+
+      > div {
+        @include disable-reset;
+      }
     }
   }
 }
@@ -272,42 +282,48 @@
   align-items: center;
 }
 
-.actions {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  position: absolute;
-  left: -40px;
-  gap: 10px;
-  z-index: 1;
+.widget-container {
+  .actions {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    position: absolute;
+    left: -40px;
+    gap: 10px;
+    z-index: 1;
 
-  button {
-    border: none;
-    padding: 7px;
-    font-size: 15px;
-    background-color: var(--light-grey);
-    border-radius: 100px;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.5s ease;
+    button {
+      border: none;
+      padding: 7px;
+      font-size: 15px;
+      background-color: var(--light-grey);
+      border-radius: 100px;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.5s ease;
 
-    &:hover {
+      &:hover {
+        i {
+          color: var(--light-blue);
+
+          &::before {
+            color: var(--light-blue);
+          }
+        }
+      }
+
       i {
-        color: var(--light-blue);
+        transition: all 0.5s ease;
+        color: var(--grey);
 
         &::before {
-          color: var(--light-blue);
+          transition: all 0.5s ease;
         }
       }
     }
 
-    i {
-      transition: all 0.5s ease;
-      color: var(--grey);
-
-      &::before {
-        transition: all 0.5s ease;
-      }
+    .drag-action {
+      cursor: grab;
     }
   }
 }

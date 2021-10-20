@@ -1,100 +1,102 @@
+import { WidgetTypes } from "@/types/enumerates";
 import { FC } from "react";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import { CourseImagesWidgetIcon } from "./widgets/CourseImagesWidget";
+import { CourseProgramWidgetIcon } from "./widgets/CourseProgramWidget";
+import { CourseScheduleWidgetIcon } from "./widgets/CourseSchedulerWidget";
+import { FeaturesWidgetIcon } from "./widgets/FeaturesWidget";
+import { ImageWidgetIcon } from "./widgets/ImageWidget";
+import { TextWidgetIcon } from "./widgets/TextWidget";
 
-const TextWidgetIcon: FC = () => {
-  return (
-    <div className="widget-icon-container">
-      <div className="widget-icon text-widget-icon">Text</div>
-      <h4>Текст</h4>
-    </div>
-  );
-};
-
-const ImageWidgetIcon: FC = () => {
-  return (
-    <div className="widget-icon-container">
-      <div className="widget-icon image-widget-icon">Img</div>
-      <h4>Изображение</h4>
-    </div>
-  );
-};
-
-const CourseScheduleWidgetIcon: FC = () => {
-  return (
-    <div className="widget-icon-container">
-      <div className="widget-icon course-schedule-widget-icon">
-        <div>
-          <div>01</div>
-          <div></div>
-        </div>
-        <div>
-          <div>18</div>
-          <div></div>
-        </div>
-        <div>
-          <div>21</div>
-          <div></div>
-        </div>
-      </div>
-      <h4>Расписание</h4>
-    </div>
-  );
-};
-
-const FeaturesWidgetIcon: FC = () => {
-  return (
-    <div className="widget-icon-container">
-      <div className="widget-icon features-widget-icon">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <h4>Особенности</h4>
-    </div>
-  );
-};
-
-const CourseImagesWidgetIcon: FC = () => {
-  return (
-    <div className="widget-icon-container">
-      <div className="widget-icon course-images-widget-icon">
-        <div>Img</div>
-        <div>Img</div>
-        <div>Img</div>
-      </div>
-      <h4>Изображения</h4>
-    </div>
-  );
-};
-
-const CourseProgramWidgetIcon: FC = () => {
-  return (
-    <div className="widget-icon-container">
-      <div className="widget-icon course-program-widget-icon">
-        <div>
-          <div></div>
-          <div></div>
-        </div>
-        <div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <h4>Модули Программы Обучения</h4>
-    </div>
-  );
-};
+export const WIDGETS_NAV_DROPPABLE_ID = "WIDGETS_NAV";
 
 const WidgetsNav: FC = () => {
   return (
     <aside className="widgets-nav">
       <h3>Виджеты</h3>
       <div className="icons">
-        <TextWidgetIcon />
-        <ImageWidgetIcon />
-        <CourseScheduleWidgetIcon />
-        <FeaturesWidgetIcon />
-        <CourseImagesWidgetIcon />
-        <CourseProgramWidgetIcon />
+        <Droppable droppableId={WIDGETS_NAV_DROPPABLE_ID}>
+          {(providedDrop) => (
+            <div {...providedDrop.droppableProps} ref={providedDrop.innerRef}>
+              <Draggable draggableId={WidgetTypes.TEXT_WIDGET} index={1}>
+                {(providedDrag) => (
+                  <div
+                    {...providedDrag.draggableProps}
+                    {...providedDrag.dragHandleProps}
+                    ref={providedDrag.innerRef}
+                  >
+                    <TextWidgetIcon />
+                  </div>
+                )}
+              </Draggable>
+              <Draggable draggableId={WidgetTypes.IMAGE_WIDGET} index={2}>
+                {(providedDrag) => (
+                  <div
+                    {...providedDrag.draggableProps}
+                    {...providedDrag.dragHandleProps}
+                    ref={providedDrag.innerRef}
+                  >
+                    <ImageWidgetIcon />
+                  </div>
+                )}
+              </Draggable>
+              <Draggable
+                draggableId={WidgetTypes.COURSE_SCHEDULE_WIDGET}
+                index={3}
+              >
+                {(providedDrag) => (
+                  <div
+                    {...providedDrag.draggableProps}
+                    {...providedDrag.dragHandleProps}
+                    ref={providedDrag.innerRef}
+                  >
+                    <CourseScheduleWidgetIcon />
+                  </div>
+                )}
+              </Draggable>
+              <Draggable draggableId={WidgetTypes.FEATURES_WIDGET} index={4}>
+                {(providedDrag) => (
+                  <div
+                    {...providedDrag.draggableProps}
+                    {...providedDrag.dragHandleProps}
+                    ref={providedDrag.innerRef}
+                  >
+                    <FeaturesWidgetIcon />
+                  </div>
+                )}
+              </Draggable>
+              <Draggable
+                draggableId={WidgetTypes.COURSE_IMAGES_WIDGET}
+                index={5}
+              >
+                {(providedDrag) => (
+                  <div
+                    {...providedDrag.draggableProps}
+                    {...providedDrag.dragHandleProps}
+                    ref={providedDrag.innerRef}
+                  >
+                    <CourseImagesWidgetIcon />
+                  </div>
+                )}
+              </Draggable>
+              <Draggable
+                draggableId={WidgetTypes.COURSE_PROGRAM_WIDGET}
+                index={6}
+              >
+                {(providedDrag) => (
+                  <div
+                    {...providedDrag.draggableProps}
+                    {...providedDrag.dragHandleProps}
+                    ref={providedDrag.innerRef}
+                  >
+                    <CourseProgramWidgetIcon />
+                  </div>
+                )}
+              </Draggable>
+              {providedDrop.placeholder}
+            </div>
+          )}
+        </Droppable>
       </div>
     </aside>
   );

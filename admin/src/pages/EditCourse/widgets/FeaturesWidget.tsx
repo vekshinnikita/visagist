@@ -4,11 +4,11 @@ import {
   FeaturesWidget as IFeaturesWidget,
 } from "@/types/models";
 import { IconTypes } from "@/types/enumerates";
-import { WidgetProps } from "../WidgetContainer";
+import { WidgetProps } from "../WidgetContainer/WidgetContainer";
 import ChildrenWrapper, {
   ChildComponentProps,
-} from "../components/ChildrenWrapper";
-import Child from "../components/Child";
+} from "./components/ChildrenWrapper";
+import Child from "./components/Child";
 
 const Feature: FC<ChildComponentProps<IFeature>> = ({
   child: feature,
@@ -80,5 +80,16 @@ const FeaturesWidget: FC<WidgetProps<IFeaturesWidget>> = ({ ...props }) => {
     </div>
   );
 };
+
+export const FeaturesWidgetIcon: FC = () => (
+  <div className="widget-icon-container">
+    <div className="widget-icon features-widget-icon">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <h4>Особенности</h4>
+  </div>
+);
 
 export default FeaturesWidget;

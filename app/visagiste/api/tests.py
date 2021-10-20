@@ -6,7 +6,7 @@ from .models import Course
 
 
 class CourseViewSetTests(BaseTestCases):
-    base_url_name = 'courses'
+    base_url_name = 'courses_admin'
 
     def setUp(self):
         super().setUp()
@@ -161,7 +161,7 @@ class CourseViewSetUpdateTests(CourseViewSetTests):
             ]
         }
 
-    def test_200(self):
+    def test_202(self):
         url = reverse(self.url_name, kwargs={"pk": self.course.id})
         response = self.user.put(url, self.correct_update_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)

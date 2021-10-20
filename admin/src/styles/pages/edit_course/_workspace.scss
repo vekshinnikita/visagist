@@ -2,4 +2,24 @@
   width: calc(100% - 200px - 200px - 250px);
   min-height: 65vh;
   margin: 100px auto;
+  position: relative;
+
+  > div {
+    height: 100%;
+    width: 100%;
+
+    &:empty {
+      position: absolute;
+    }
+  }
+
+  .empty-workspace {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    opacity: 0.4;
+  }
 }

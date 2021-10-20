@@ -1,5 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
-from core.serializers import ImageSerializer, DraggableSerializer, Base64ImageField
+from core.serializers import Base64ImageSerializer, DraggableSerializer, Base64ImageField, ImageSerializer
 from widgets.models import Widget, TextWidget, ImageWidget, FeaturesWidget, CourseScheduleWidget, CourseImagesWidget, CourseProgramWidget
 from .children import *
 
@@ -16,12 +16,19 @@ class TextWidgetSerializer(WidgetSerializer):
         fields = ['content'] + WidgetSerializer.Meta.fields
 
 
-class ImageWidgetSerializer(WidgetSerializer):
+class Base64ImageWidgetSerializer(WidgetSerializer):
     image = Base64ImageField(represent_in_base64=True)
 
     class Meta:
         model = ImageWidget
         fields = ['image'] + WidgetSerializer.Meta.fields
+
+
+class ImageWidgetSerializer(WidgetSerializer):
+    class Meta:
+        model = ImageWidget
+        fields = ['image'] + WidgetSerializer.Meta.fields
+
 
 class WidgetWithChildrenSerializer(WidgetSerializer):
     children_serializer = ChildSerializer
@@ -64,8 +71,8 @@ class CourseScheduleWidgetSerializer(WidgetWithChildrenSerializer):
         fields = WidgetWithChildrenSerializer.Meta.fields
 
 
-class CourseImagesWidgetSerializer(WidgetWithChildrenSerializer):
-    children_serializer = ImageSerializer
+class Base64CourseImagesWidgetSerializer(WidgetWithChildrenSerializer):
+    children_serializer = Base64ImageSerializer
     children_related_name = 'images'
     children = children_serializer(source=children_related_name, many=True)
 
@@ -78,7 +85,7 @@ class CourseImagesWidgetSerializer(WidgetWithChildrenSerializer):
         widget = CourseImagesWidget.objects.create(**validated_data)
 
         for i in images:
-            serializer = ImageSerializer(data={
+            serializer = Base64ImageSerializer(data={
                 'content_type': ContentType.objects.get_for_model(widget).id,
                 'object_id': widget.id,
                 **i
@@ -87,6 +94,14 @@ class CourseImagesWidgetSerializer(WidgetWithChildrenSerializer):
             serializer.save()
 
         return widget
+
+
+class CourseImagesWidgetSerializer(WidgetSerializer):
+    children = ImageSerializer(source='images', many=True)
+
+    class Meta:
+        model = CourseImagesWidget
+        fields = ['children'] + WidgetSerializer.Meta.fields
 
 
 class CourseProgramWidgetSerializer(WidgetWithChildrenSerializer):

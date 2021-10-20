@@ -5,11 +5,11 @@ import {
   CourseProgramModule as ICourseProgramModule,
   CourseProgramWidget as ICourseProgramWidget,
 } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer";
+import { WidgetProps } from "../WidgetContainer/WidgetContainer";
 import ChildrenWrapper, {
   ChildComponentProps,
-} from "../components/ChildrenWrapper";
-import Child from "../components/Child";
+} from "./components/ChildrenWrapper";
+import Child from "./components/Child";
 
 const CourseProgramModule: FC<ChildComponentProps<ICourseProgramModule>> = ({
   child: program,
@@ -91,5 +91,21 @@ const CourseProgramWidget: FC<WidgetProps<ICourseProgramWidget>> = ({
     </div>
   );
 };
+
+export const CourseProgramWidgetIcon: FC = () => (
+  <div className="widget-icon-container">
+    <div className="widget-icon course-program-widget-icon">
+      <div>
+        <div></div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <h4>Модули Программы Обучения</h4>
+  </div>
+);
 
 export default CourseProgramWidget;

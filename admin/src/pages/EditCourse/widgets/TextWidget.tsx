@@ -2,7 +2,7 @@ import { FC } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { TextWidget as ITextWidget } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer";
+import { WidgetProps } from "../WidgetContainer/WidgetContainer";
 
 const TextWidget: FC<WidgetProps<ITextWidget>> = ({
   widget,
@@ -28,5 +28,12 @@ const TextWidget: FC<WidgetProps<ITextWidget>> = ({
     </div>
   );
 };
+
+export const TextWidgetIcon = () => (
+  <div className="widget-icon-container">
+    <div className="widget-icon text-widget-icon">Text</div>
+    <h4>Текст</h4>
+  </div>
+);
 
 export default TextWidget;

@@ -1,0 +1,45 @@
+.loading-mask {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba($color: #e7ebf3, $alpha: 0.6);
+}
+
+.loading {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+
+  > div {
+    height: 100%;
+    width: 17.5%;
+    background: var(--blue);
+    animation: bar-loading 1s infinite alternate;
+  }
+
+  > div:nth-child(2) {
+    animation-delay: -0.2s;
+  }
+
+  > div:nth-child(3) {
+    animation-delay: -0.4s;
+  }
+
+  @keyframes bar-loading {
+    0% {
+      transform: scaleY(0.5);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
+}

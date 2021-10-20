@@ -6,6 +6,7 @@ import { ActionsReturnValues } from "./components.types";
 const initialState: ComponentsState = {
   page: Pages.INIT,
   coursesSection: CoursesSections.INIT,
+  isDraggingWidget: false,
 };
 
 const componentsReducer = (
@@ -22,6 +23,11 @@ const componentsReducer = (
       return {
         ...state,
         coursesSection: action.section,
+      };
+    case constants.SET_IS_DRAGGING_WIDGET:
+      return {
+        ...state,
+        isDraggingWidget: action.isDragging,
       };
     default:
       return state;

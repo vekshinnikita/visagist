@@ -1,4 +1,5 @@
 export enum WidgetTypes {
+  INIT = "",
   BASE_WIDGET = "BASE_WIDGET",
   TEXT_WIDGET = "TEXT_WIDGET",
   IMAGE_WIDGET = "IMAGE_WIDGET",

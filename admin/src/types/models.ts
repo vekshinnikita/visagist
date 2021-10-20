@@ -65,3 +65,8 @@ export interface Course extends Draggable {
 export interface CourseDetails extends Course {
   widgets: Widget[];
 }
+
+export interface SignInData {
+  username: string;
+  password: string;
+}

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from core.serializers import Base64ImageField
 from widgets.models import Widget
-from widgets.utils import serialize_widget, clear_course_widgets, create_course_widgets
+from widgets.utils import serialize_widget, serialize_admin_widget, clear_course_widgets, create_course_widgets
 from widgets.serializers.fields import WidgetField
 from .models import Course
 
@@ -14,6 +14,20 @@ class ShortCourseRetriveSerializer(serializers.ModelSerializer):
 
 class CourseRetriveSerializer(ShortCourseRetriveSerializer):
     widgets = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Course
+        fields = ['widgets'] + ShortCourseRetriveSerializer.Meta.fields
+
+    def get_widgets(self, course: Course):
+        return [
+            serialize_widget(widget, self.context) for widget in Widget.objects.get_course_widgets(course.id)
+            if widget.is_visible
+        ]
+
+
+class Base64CourseRetriveSerializer(ShortCourseRetriveSerializer):
+    widgets = serializers.SerializerMethodField()
     image = Base64ImageField(represent_in_base64=True)
 
     class Meta:
@@ -21,7 +35,7 @@ class CourseRetriveSerializer(ShortCourseRetriveSerializer):
         fields = ['widgets'] + ShortCourseRetriveSerializer.Meta.fields
 
     def get_widgets(self, course: Course):
-        return [serialize_widget(widget, self.context) for widget in Widget.objects.get_course_widgets(course.id)]
+        return [serialize_admin_widget(widget, self.context) for widget in Widget.objects.get_course_widgets(course.id)]
 
 
 class CourseCreateSerializer(serializers.ModelSerializer):
@@ -33,7 +47,7 @@ class CourseCreateSerializer(serializers.ModelSerializer):
         fields = ['title', 'widgets', 'is_visible', 'position', 'image']
     
     def to_representation(self, instance):
-        return CourseRetriveSerializer(instance).data
+        return Base64CourseRetriveSerializer(instance).data
 
     def create(self, validated_data):
         course = Course.objects.create(

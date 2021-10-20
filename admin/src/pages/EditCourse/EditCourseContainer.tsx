@@ -1,13 +1,16 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCurrentCourse, updateCourse } from "@/state/courses";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { deleteCourse, getCurrentCourse, updateCourse } from "@/state/courses";
+import { createWidget, moveWidget } from "@/state/widgets";
 import { selectCurrentCourse } from "@/selectors";
-import { CourseDetails } from "@/types/models";
+import { getIdForNewChild } from "@/utils";
+import { CourseDetails, Widget } from "@/types/models";
 import EditCourseInfoNav from "./EditCourseInfoNav";
-import { WidgetContainer } from "./WidgetContainer/WidgetContainer";
 import WidgetsNav from "./WidgetsNav";
-import Workspace from "./Workspace";
+import Workspace, { WORKSPACE_DROPPABLE_ID } from "./Workspace";
+import { getWidgetInitValue } from "./widgets";
 
 const EditCourseContainer: FC = () => {
   const { pk } = useParams<{ pk: string }>();
@@ -18,18 +21,46 @@ const EditCourseContainer: FC = () => {
     dispatch(getCurrentCourse(Number(pk)));
   }, [dispatch, pk]);
 
+  const onDragEnd = (result: DropResult) => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    if (source.droppableId === WORKSPACE_DROPPABLE_ID) {
+      dispatch(moveWidget(Number(draggableId), Number(destination.index)));
+    } else {
+      const widgetInitValue: Widget = {
+        id: getIdForNewChild(course.widgets),
+        is_visible: true,
+        position: Number(destination.index),
+        ...getWidgetInitValue(draggableId),
+      };
+      dispatch(createWidget(widgetInitValue));
+    }
+  };
+
   return (
     <main className="edit-course">
-      <EditCourseInfoNav
-        course={course}
-        updateCourse={(course: CourseDetails) => dispatch(updateCourse(course))}
-      />
-      <Workspace>
-        {course.widgets?.map((w) => (
-          <WidgetContainer widget={w} key={w.id} />
-        ))}
-      </Workspace>
-      <WidgetsNav />
+      <DragDropContext onDragEnd={onDragEnd}>
+        <EditCourseInfoNav
+          course={course}
+          updateCourse={(course: CourseDetails) =>
+            dispatch(updateCourse(course))
+          }
+          deleteCourse={(courseId: number) => dispatch(deleteCourse(courseId))}
+        />
+        <Workspace widgets={course.widgets} />
+        <WidgetsNav />
+      </DragDropContext>
     </main>
   );
 };

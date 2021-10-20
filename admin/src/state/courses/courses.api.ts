@@ -2,8 +2,9 @@ import { SERVER_URL } from "@/env";
 import { axiosAPI } from "@/utils";
 import { CourseDetails } from "@/types/models";
 
-const getCoursesListUrl = () => SERVER_URL + "/api/courses/";
-const getCoursesDetailsUrl = (pk: number) => SERVER_URL + `/api/courses/${pk}/`;
+const getCoursesListUrl = () => SERVER_URL + "/api/admin/courses/";
+const getCoursesDetailsUrl = (pk: number) =>
+  SERVER_URL + `/api/admin/courses/${pk}/`;
 
 export const getCoursesApi = () =>
   axiosAPI.get(getCoursesListUrl()).then((response) => response.data);

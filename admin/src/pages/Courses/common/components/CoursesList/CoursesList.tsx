@@ -1,8 +1,13 @@
 import { FC, useState } from "react";
 import { Course } from "@/types/models";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteCourses, hideCourses, revealCourses } from "@/state/courses";
+import {
+  selectGetCoursesIsLoading,
+  selectIsBulkActionsLoading,
+} from "@/selectors";
+import { Loading, LoadingMask } from "@/common/components/Loading";
 
 interface CoursesListProps {
   courses: Course[];
@@ -38,6 +43,8 @@ export const CoursesList: FC<CoursesListProps> = ({ courses }) => {
   const [currentAction, setCurrentAction] = useState(actions[0]);
   const [isActionsVisible, setIsActionsVisible] = useState(false);
   const [selectedCoursesIds, setSelectedCoursesIds] = useState([] as number[]);
+  const isCreateCourseLoading = useSelector(selectIsBulkActionsLoading);
+  const isGetCoursesLoading = useSelector(selectGetCoursesIsLoading);
 
   const selectAction = (action: Action) => {
     setCurrentAction(action);
@@ -63,6 +70,7 @@ export const CoursesList: FC<CoursesListProps> = ({ courses }) => {
       <div className="actions">
         <button className="button" onClick={submitAction}>
           Применить
+          {isCreateCourseLoading && <LoadingMask />}
         </button>
         <div className="select">
           <button
@@ -115,6 +123,7 @@ export const CoursesList: FC<CoursesListProps> = ({ courses }) => {
             ></span>
           </div>
         ))}
+        {isGetCoursesLoading && <Loading />}
       </div>
     </div>
   );

@@ -2,3 +2,10 @@
 @forward "./edit_course_info_nav";
 @forward "./widgets";
 @forward "./workspace";
+
+.cursor {
+  cursor: grab;
+  position: absolute;
+  z-index: 10;
+  transform: translate(5px, 5px);
+}

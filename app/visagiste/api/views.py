@@ -1,18 +1,35 @@
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes
 from .models import Course
-from .serializers import CourseRetriveSerializer, CourseCreateSerializer, ShortCourseRetriveSerializer
+from .serializers import CourseRetriveSerializer, CourseCreateSerializer, ShortCourseRetriveSerializer, Base64CourseRetriveSerializer
+
+
+class CourseViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = ShortCourseRetriveSerializer
+
+    def retrieve(self, request, pk):
+        instance = self.get_object()
+        serializer = CourseRetriveSerializer(instance, context={"request": request})        
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def list(self, request, *args, **kwargs):
+        serializer = self.get_serializer(self.get_queryset(), context={"request": request}, many=True)        
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(is_visible=True)
 
 
 class AdminCourseViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = ShortCourseRetriveSerializer
     queryset = Course.objects.all()
     
     def retrieve(self, request, pk):
         instance = self.get_object()
-        serializer = CourseRetriveSerializer(instance, context={"request": request})
+        serializer = Base64CourseRetriveSerializer(instance, context={"request": request})
         return Response(serializer.data)
 
     def create(self, request):
@@ -30,6 +47,7 @@ class AdminCourseViewSet(viewsets.ModelViewSet):
         return Response(status=status.HTTP_202_ACCEPTED)
 
 
+@authentication_classes([permissions.IsAuthenticated])
 @api_view(['POST'])
 def hide_courses(request):
     courses_ids = request.data['ids']
@@ -40,6 +58,7 @@ def hide_courses(request):
     return Response(status=status.HTTP_200_OK)
 
 
+@authentication_classes([permissions.IsAuthenticated])
 @api_view(['POST'])
 def reveal_courses(request):
     courses_ids: list[int] = request.data['ids']

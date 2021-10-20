@@ -12,3 +12,8 @@ export const highlightCourseSection: types.HighlightCoursesSection = (
   type: constants.HIGHLIGHT_COURSES_SECTION,
   section,
 });
+
+export const setIsDraggingWidget: types.SetIsDraggingWidget = (isDragging) => ({
+  type: constants.SET_IS_DRAGGING_WIDGET,
+  isDragging,
+});
