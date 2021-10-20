@@ -2,6 +2,9 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import { CourseDetails } from "@/types/models";
 import ImageField from "@/common/components/ImageField";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
+import { selectIsUpdateCourseLoading } from "@/selectors";
+import { LoadingMask } from "@/common/components/Loading";
 
 interface EditCourseInfoNavProps {
   course: CourseDetails;
@@ -18,6 +21,7 @@ const EditCourseInfoNav: FC<EditCourseInfoNavProps> = ({
   const [position, setPosition] = useState(course.position);
   const [isVisible, setIsVisible] = useState(course.is_visible);
   const [courseImage, setCourseImage] = useState<any>("");
+  const isLoading = useSelector(selectIsUpdateCourseLoading);
   const history = useHistory();
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
@@ -78,6 +82,7 @@ const EditCourseInfoNav: FC<EditCourseInfoNavProps> = ({
 
         <button type="submit" className="button">
           Сохранить
+          {isLoading && <LoadingMask />}
         </button>
         <button
           type="button"

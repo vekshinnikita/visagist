@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from "@redux-saga/core/effects";
 import { Course, CourseDetails } from "@/types/models";
+import { showAlert } from "../alert";
 import * as actions from "./courses.actions";
 import * as api from "./courses.api";
 import * as constants from "./courses.constants";
@@ -11,6 +12,7 @@ function* getCoursesWorker() {
     yield put(actions.getCoursesSuccess(courses));
   } catch (error) {
     console.log(error);
+    yield put(showAlert("Произошла ошибка: " + error));
     yield put(actions.getCoursesFailed());
   }
 }
@@ -24,6 +26,7 @@ function* getCurrentCourseWorker(action: types.GetCurrentCourseValue) {
     yield put(actions.getCurrentCourseSuccess(currentCourse));
   } catch (error) {
     console.log(error);
+    yield put(showAlert("Произошла ошибка: " + error));
     yield put(actions.getCurrentCourseFailed());
   }
 }
@@ -35,8 +38,10 @@ function* createCourseWorker(action: types.CreateCourseValue) {
       action.course
     );
     yield put(actions.createCourseSuccess(course));
+    yield put(showAlert("Курс создан"));
   } catch (error) {
     console.log(error);
+    yield put(showAlert("Произошла ошибка: " + error));
     yield put(actions.createCourseFailed());
   }
 }
@@ -45,8 +50,10 @@ function* updateCourseWorker(action: types.UpdateCourseValue) {
   try {
     yield call(api.updateCourseApi, action.course.id, action.course);
     yield put(actions.updateCourseSuccess());
+    yield put(showAlert("Курс сохранен"));
   } catch (error: any) {
     console.log(error.response.data);
+    yield put(showAlert("Произошла ошибка: " + error));
     yield put(actions.updateCourseFailed());
   }
 }
@@ -55,8 +62,10 @@ function* deleteCourseWorker(action: types.DeleteCourseValue) {
   try {
     yield call(api.deleteCourseApi, action.pk);
     yield put(actions.deleteCourseSuccess());
+    yield put(showAlert("Курс удален"));
   } catch (error) {
     console.log(error);
+    yield put(showAlert("Произошла ошибка: " + error));
     yield put(actions.deleteCourseFailed());
   }
 }
@@ -67,6 +76,7 @@ function* hideCoursesWorker(action: types.HideCoursesValue) {
     yield put(actions.hideCoursesSuccess(action.ids));
   } catch (error) {
     console.log(error);
+    yield put(showAlert("Произошла ошибка: " + error));
     yield put(actions.hideCoursesFailed());
   }
 }
@@ -77,6 +87,7 @@ function* revealCoursesWorker(action: types.RevealCoursesValue) {
     yield put(actions.revealCoursesSuccess(action.ids));
   } catch (error) {
     console.log(error);
+    yield put(showAlert("Произошла ошибка: " + error));
     yield put(actions.revealCoursesFailed());
   }
 }
@@ -87,6 +98,7 @@ function* deleteCoursesWorker(action: types.DeleteCoursesValue) {
     yield put(actions.deleteCoursesSuccess(action.ids));
   } catch (error) {
     console.log(error);
+    yield put(showAlert("Произошла ошибка: " + error));
     yield put(actions.deleteCoursesFailed());
   }
 }

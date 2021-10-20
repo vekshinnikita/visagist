@@ -1,5 +1,8 @@
 import { RootState } from "@/types";
 
+// Alert
+export const selectAlertMessage = (state: RootState) => state.alert.message;
+
 // Auth
 export const selectIsAuth = (state: RootState) => state.auth.isAuth;
 export const selectIsAuthLoading = (state: RootState) => state.auth.isLoading;
@@ -23,3 +26,5 @@ export const selectIsCourseCreateLoading = (state: RootState) =>
   state.courses.createCourseIsLoading;
 export const selectIsBulkActionsLoading = (state: RootState) =>
   state.courses.bulkActionsIsLoading;
+export const selectIsUpdateCourseLoading = (state: RootState) =>
+  state.courses.updateCourseIsLoading;

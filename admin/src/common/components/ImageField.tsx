@@ -1,4 +1,5 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
+import { LoadingMask } from "./Loading";
 
 interface ImageFieldProps {
   value: string;
@@ -11,7 +12,11 @@ const ImageField: FC<ImageFieldProps> = ({
   setValue,
   resetValue = "",
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const loadImage = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsLoading(true);
+
     if (e.target.files) {
       if (e.target.files.length > 0) {
         const image = e.target.files[0];
@@ -19,8 +24,8 @@ const ImageField: FC<ImageFieldProps> = ({
 
         render.onload = (e) => {
           setValue(e.target?.result);
+          setIsLoading(false);
         };
-
         render.readAsDataURL(image);
       }
     }
@@ -29,6 +34,7 @@ const ImageField: FC<ImageFieldProps> = ({
   return (
     <div className="image-field">
       <input type="file" onChange={loadImage} />
+      {isLoading && <LoadingMask />}
       <span
         className="loaded-image"
         style={{

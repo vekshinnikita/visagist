@@ -1,5 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./common/components/PrivateRoute";
+import AlertContainer from "./layout/AlertContainer";
 import NavbarContainer from "./layout/NavbarContainer";
 import CoursesContainer from "./pages/Courses/CoursesContainer";
 import EditCourseContainer from "./pages/EditCourse/EditCourseContainer";
@@ -24,6 +25,8 @@ const routes = (
       <PrivateRoute path="/course/:pk/" exact component={EditCourseContainer} />
       <Route path="/sign_in/" exact component={SignInContainer} />
     </Switch>
+
+    <AlertContainer />
   </BrowserRouter>
 );
 

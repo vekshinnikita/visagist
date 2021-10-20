@@ -37,7 +37,7 @@ const SignIn: FC<SignInProps> = ({ isLoading, signIn }) => {
           {...bindUsername}
         />
         <input
-          type="text"
+          type="password"
           className="base-input"
           placeholder="Пароль"
           {...bindPassword}

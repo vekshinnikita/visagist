@@ -102,28 +102,33 @@ export const CoursesList: FC<CoursesListProps> = ({ courses }) => {
         </div>
       </div>
       <div className="list">
-        {courses.map((course, index) => (
-          <div
-            className={
-              "course-item" +
-              (course.is_visible ? "" : " course-item-invisible")
-            }
-            data-animation-delay={index / 10}
-            key={course.id}
-          >
-            <Link to={`/course/${course.id}/`}>{course.title}</Link>
-            <span
-              className="radio"
-              onClick={() => selectCourse(course)}
-              style={{
-                background: isCourseInSelectedCourses(course)
-                  ? "var(--blue)"
-                  : undefined,
-              }}
-            ></span>
+        {!isGetCoursesLoading ? (
+          courses.map((course, index) => (
+            <div
+              className={
+                "course-item" +
+                (course.is_visible ? "" : " course-item-invisible")
+              }
+              data-animation-delay={index / 10}
+              key={course.id}
+            >
+              <Link to={`/course/${course.id}/`}>{course.title}</Link>
+              <span
+                className="radio"
+                onClick={() => selectCourse(course)}
+                style={{
+                  background: isCourseInSelectedCourses(course)
+                    ? "var(--blue)"
+                    : undefined,
+                }}
+              ></span>
+            </div>
+          ))
+        ) : (
+          <div className="is-loading">
+            <Loading />
           </div>
-        ))}
-        {isGetCoursesLoading && <Loading />}
+        )}
       </div>
     </div>
   );
