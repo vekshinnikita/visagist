@@ -1,54 +1,41 @@
-import React, { FC } from "react";
+import React, { FC , useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { featchCourses } from '@/state/courses/courses.actions'
+import { selectCourses } from '@/selectors'
 import { Link } from "react-router-dom";
+import { Course } from "@/typing/models";
 
 interface ProgramProps {
-  imageUrl: string;
-  link: string;
-  title: string;
+  course: Course
 }
 
-const Program: FC<ProgramProps> = ({ imageUrl, link, title }) => {
+const Program: FC<ProgramProps> = ({ course }) => {
   return (
-    <Link
-      to={link}
-      className="program"
-      style={{ backgroundImage: `url(${imageUrl})` }}
-    >
-      {title}
+    <Link to={`/courses/${course.id}`}>
+      <div className="course-card"
+      style={{ backgroundImage: `url(${course.image})` }}>
+        <h2>{course.title}</h2>
+      </div>
     </Link>
   );
 };
 
-const programs: ProgramProps[] = [
-  {
-    imageUrl: "/static/Ф.3.1.jpg",
-    link: "/course/visagiste/",
-    title: "Базовый курс «Визажист»",
-  },
-  {
-    imageUrl: "/static/Ф.3.2.jpg",
-    link: "/course/wedding-s/",
-    title: "Свадебный стилист",
-  },
-  {
-    imageUrl: "/static/Ф.3.3.jpg",
-    link: "/course/visagiste/",
-    title: "Базовый курс «Визажист»",
-  },
-  {
-    imageUrl: "/static/Ф.3.4.jpg",
-    link: "/course/visagiste/",
-    title: "Базовый курс «Визажист»",
-  },
-];
-
 const VisagisteCourse: FC = () => {
+  const dispatch = useDispatch()
+   
+  useEffect(() => {
+      dispatch(featchCourses())
+  }, [])
+  const courses = useSelector(selectCourses);
+
   return (
     <section className="visagiste-course">
-      <div className="title">
+      <div className="title after">
         <h2>КУРСЫ ОБУЧЕНИЯ ДЛЯ ВИЗАЖИСТОВ</h2>
       </div>
-      <div className="programs"></div>
+      <div className="programs">
+      {courses.map(course => <Program course={course} key={course.id}/>)}
+      </div>
     </section>
   );
 };

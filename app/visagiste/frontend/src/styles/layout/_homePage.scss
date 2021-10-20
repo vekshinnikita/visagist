@@ -1,0 +1,41 @@
+
+.visagiste-course{
+    display: flex;
+    .title{
+      text-align: center;
+      font-size: 22px;
+      padding: 0 0 13px 0;
+      max-width: 283px;
+    }
+    .programs{
+        display:flex;
+        flex-wrap: wrap;
+    }
+  }
+  
+.course-card{
+    background-size: cover;
+    width: 283px;
+    height: 283px;
+    margin: 10px 5px;
+    justify-content: center;
+    align-items: center;  
+    display: flex;
+    h2{
+        font-size: 40px;
+        color: #fff;
+            
+    }
+  }
+.after{
+    ::after{
+        content: '';
+        display: block;
+        height: 2px;
+        width: 70px;
+        background-color: #000;
+        margin: auto;
+        margin-top: 13px;
+    }
+}
+

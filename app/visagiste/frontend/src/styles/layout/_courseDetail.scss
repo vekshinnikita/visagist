@@ -1,0 +1,233 @@
+a{
+    text-decoration: none;
+
+}
+.a{
+    :hover{
+        color: #F58100;
+        transition: 0.3s;
+    }
+}
+
+p {
+    font-size: 14px;
+    color: #494949;
+    margin: 0 0 10px;
+}
+h4{
+    font-size: 16px;
+    margin: 0 0 10px;
+    @media(max-width: 1200px){
+       font-size: 22px;
+    }
+}
+h2{
+    font-size: 22px;
+    font-weight: 500;
+    color: #414141;
+    @media(max-width: 1200px){
+        font-size: 19px;
+     }
+ }
+
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+    @media(max-width: 1280px){
+        max-width: 900px;
+    }
+    @media(max-width: 1020px){
+        max-width: 580px;
+    }
+
+}
+
+.content{
+    margin-top: 50px;
+}
+
+.course {
+    margin: 0 0 40px;
+}
+
+.row-course{
+    display: flex;
+    margin: 0 0 100px 0;
+    @media(max-width: 1020px){
+        flex-direction: column;
+        margin: 0 0 40px 0;
+    }
+}
+
+.photo-course{
+    width: 270px;
+    height: 270px;
+    z-index: -10;
+    background-size: cover;
+}
+.photo-course::before{
+    content:'';
+    position: absolute;
+    width: 70px;
+    height: 4px;
+    background-color: #000;
+    display: block;
+    left: 230px;
+    position: relative;
+    top: 200px;
+    @media(max-width: 1020px){
+        display: none;
+    }
+}
+
+.cover-space{
+    flex: 1 1 auto;
+}
+
+.course-title{
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 30px 40px;
+    h1 {
+        text-transform: uppercase;
+        margin: 0;
+    }
+    span {
+        font-size: 9px;
+    }
+    @media(max-width: 1180px){
+        padding: 30px 0 0 0 ;
+    }
+}
+
+.after{
+    ::after{
+        content: '';
+        display: block;
+        height: 2px;
+        width: 70px;
+        background-color: #000;
+        margin: auto;
+        margin-top: 13px;
+    }
+}
+
+.contact{
+    border-top: 1px solid #efefef;
+    padding: 100px 0 55px;
+}
+
+.contact-info{
+    display: flex;
+    justify-content: space-around;
+    h3{
+        margin: 0 0 25px;
+    }
+    @media(max-width: 800px){
+        flex-direction: column;
+    }
+} 
+
+.contact-num-info{
+    text-align: center;
+    @media(max-width: 800px){
+        margin: 0 0 30px;
+    }
+}
+
+
+.contact-row{
+    display: flex;
+    flex-direction: column;
+}
+.contact-num{
+    line-height: 25px;
+}
+
+.signup-form{
+    margin: 20px 0 20px 0;
+    background-color: #F0F0F0;
+    padding: 10px 0 30px 0;
+}
+
+.singup-title{
+    margin: 0 0 40px 0;
+    text-align: center;
+}
+.signup-row{
+    display: flex;
+    justify-content: space-around;
+
+}
+.signup-btn{
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 9px 25px;
+    font-size: 19px;
+    border-radius: 10px;
+    border: solid 2px black;
+}
+.btn-telegram {
+    background-color: #0088cc;
+}
+.btn-instagram {
+    background-color: #c1558b;
+}
+.btn-whatsapp {
+    background-color: #43d854;
+}
+
+.simular-courses{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.simular-course-title{
+    text-align: center;
+    padding: 35px 0 0 0 ;
+
+    h2{
+        margin: 0 0 30px;
+    }
+    @media(max-width: 1200px){
+        font-size: 19px;
+     }
+ }
+
+
+.sc-image{
+    margin: 5px 20px 0 0;
+    img{
+    max-height: 230px;
+    max-width: 230px;
+    @media(max-width: 1200px){
+        max-height: 400px;
+        max-width: 400px;
+        margin: 0 0 30px;
+    }
+    @media(max-width: 500px){
+        max-width: 80%;
+        margin: 0 0 30px;
+    }
+    }
+
+}
+.simular-course{
+    display: flex;
+    @media(max-width: 1200px){
+        flex-direction: column;
+        background-color: #F0F0F0;
+        padding: 30px 10px 0 10px;
+        text-align: center;
+        font-size: 19px;
+        min-height: 650px;
+    }
+}
+
+.sc-body{
+    a{
+        font-size: 14px;
+    }
+}
