@@ -23,3 +23,5 @@ export const selectIsCourseCreateLoading = (state: RootState) =>
   state.courses.createCourseIsLoading;
 export const selectIsBulkActionsLoading = (state: RootState) =>
   state.courses.bulkActionsIsLoading;
+export const selectIsUpdateCourseLoading = (state: RootState) =>
+  state.courses.updateCourseIsLoading;

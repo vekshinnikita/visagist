@@ -15,7 +15,7 @@ axiosAPI.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
     const originalRequest = error.config;
-    const refreshUrl = SERVER_URL + "/api/token/refresh/";
+    const refreshUrl = SERVER_URL + "/token/refresh/";
 
     if (error.response) {
       if (error.response.status === 401 && originalRequest.url === refreshUrl) {

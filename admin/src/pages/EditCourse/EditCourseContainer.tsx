@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
@@ -11,11 +11,13 @@ import EditCourseInfoNav from "./EditCourseInfoNav";
 import WidgetsNav from "./WidgetsNav";
 import Workspace, { WORKSPACE_DROPPABLE_ID } from "./Workspace";
 import { getWidgetInitValue } from "./widgets";
+import Preview from "./Preview";
 
 const EditCourseContainer: FC = () => {
   const { pk } = useParams<{ pk: string }>();
   const course = useSelector(selectCurrentCourse);
   const dispatch = useDispatch();
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getCurrentCourse(Number(pk)));
@@ -59,6 +61,11 @@ const EditCourseContainer: FC = () => {
           deleteCourse={(courseId: number) => dispatch(deleteCourse(courseId))}
         />
         <Workspace widgets={course.widgets} />
+        <Preview
+          isPreviewOpen={isPreviewOpen}
+          close={() => setIsPreviewOpen(false)}
+          open={() => setIsPreviewOpen(true)}
+        />
         <WidgetsNav />
       </DragDropContext>
     </main>
