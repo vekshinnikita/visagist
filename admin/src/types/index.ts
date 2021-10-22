@@ -1,5 +1,5 @@
 import { CoursesSections, Pages, WidgetTypes } from "./enumerates";
-import { CourseDetails, Course } from "./models";
+import { CourseDetails, Course, Review } from "./models";
 
 export interface CoursesState {
   currentCourse: CourseDetails;
@@ -27,9 +27,18 @@ export interface AlertState {
   message: string;
 }
 
+export interface ReviewsState {
+  reviews: Review[];
+  isGetReviewsLoading: boolean;
+  isCreateReviewLoading: boolean;
+  isUpdateReviewLoading: boolean;
+  isDeleteReviewLoading: boolean;
+}
+
 export interface RootState {
   auth: AuthState;
   courses: CoursesState;
   components: ComponentsState;
   alert: AlertState;
+  reviews: ReviewsState;
 }

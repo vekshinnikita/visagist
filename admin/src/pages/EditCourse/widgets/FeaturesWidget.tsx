@@ -4,7 +4,7 @@ import {
   FeaturesWidget as IFeaturesWidget,
 } from "@/types/models";
 import { IconTypes } from "@/types/enumerates";
-import { WidgetProps } from "../WidgetContainer/WidgetContainer";
+import { WidgetProps } from "../WidgetContainer";
 import ChildrenWrapper, {
   ChildComponentProps,
 } from "./components/ChildrenWrapper";

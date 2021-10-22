@@ -5,7 +5,7 @@ import {
   sortDraggableByPosition,
 } from "@/utils";
 import { WidgetWithChildren } from "@/types/models";
-import { WidgetProps } from "../../WidgetContainer/WidgetContainer";
+import { WidgetProps } from "../../WidgetContainer";
 import CreateChild from "./CreateChild";
 
 export interface ChildComponentProps<T> {

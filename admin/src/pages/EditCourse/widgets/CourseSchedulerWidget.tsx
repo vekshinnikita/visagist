@@ -5,7 +5,7 @@ import {
   CourseScheduleWidget as ICourseSchedulerWidget,
 } from "@/types/models";
 import { checkDateTimeFormat, stringifyDate } from "@/utils";
-import { WidgetProps } from "../WidgetContainer/WidgetContainer";
+import { WidgetProps } from "../WidgetContainer";
 import ChildrenWrapper, {
   ChildComponentProps,
 } from "./components/ChildrenWrapper";

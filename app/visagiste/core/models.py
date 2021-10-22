@@ -3,7 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 class Draggable(models.Model):
-    position = models.PositiveSmallIntegerField(default=1)
+    position = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
         abstract = True

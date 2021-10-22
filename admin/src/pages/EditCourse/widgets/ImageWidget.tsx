@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import { ImageWidget as IImageWidget } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer/WidgetContainer";
+import { WidgetProps } from "../WidgetContainer";
 
 const ImageWidget: FC<WidgetProps<IImageWidget>> = ({
   widget,

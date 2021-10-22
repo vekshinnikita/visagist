@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { SERVER_URL } from "@/env";
-import { Draggable, Widget } from "@/types/models";
+import { Draggable } from "@/types/models";
 
 export const getAccessToken = () => localStorage.getItem("access_token");
 export const getRefreshToken = () => localStorage.getItem("refresh_token");
@@ -77,21 +77,21 @@ export const removeHeaders = () => {
   axiosAPI.defaults.headers["Authentication"] = undefined;
 };
 
-export const getWidgetsListWithoutSpecificOne = (
-  widgets: Widget[],
-  widgetId: number
-) => widgets.filter((w) => w.id !== widgetId);
+export const getItemsListWithoutSpecificOne = (
+  items: { id: number }[],
+  itemId: number
+): any => items.filter((i) => i.id !== itemId);
 
-export const getWidget = (widgets: Widget[], widgetId: number) => {
-  const widget = widgets.find((w) => w.id === widgetId);
+export const getItemById = (items: { id: number }[], itemId: number): any => {
+  const item = items.find((i) => i.id === itemId);
 
-  if (widget) return widget;
+  if (item) return item;
   throw new Error("Widget not found");
 };
 
-const compareByDraggablePosition = (w1: Draggable, w2: Draggable) => {
-  if (w1.position > w2.position) return 1;
-  if (w1.position < w2.position) return -1;
+const compareByDraggablePosition = (d1: Draggable, d2: Draggable) => {
+  if (d1.position > d2.position) return 1;
+  if (d1.position < d2.position) return -1;
   return 0;
 };
 
@@ -123,3 +123,26 @@ export const getPositionForNewChild = (items: Draggable[]) =>
 
 export const getIdForNewChild = (items: { id: number }[]) =>
   Math.max(...items.map((i) => i.id), 0) + 1;
+
+export const getFixedDraggableSequence = (
+  draggableItems: Draggable[],
+  oldPosition: number,
+  newPosition: number
+) => {
+  let moved;
+  if (newPosition < oldPosition) {
+    moved = draggableItems.filter(
+      (d) => d.position >= newPosition && d.position < oldPosition
+    );
+    moved.map((d) => d.position++);
+  } else if (newPosition > oldPosition) {
+    moved = draggableItems.filter(
+      (d) => d.position <= newPosition && d.position > oldPosition
+    );
+    moved.map((w) => w.position--);
+  } else {
+    return draggableItems;
+  }
+
+  return moved;
+};
