@@ -22,7 +22,7 @@ const Workspace: FC<WorkspaceProps> = ({ widgets }) => {
           <Droppable droppableId={WORKSPACE_DROPPABLE_ID}>
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                {widgets.map((w, index) => (
+                {widgets?.map((w, index) => (
                   <WidgetContainer widget={w} key={w.id} index={index} />
                 ))}
                 {provided.placeholder}
