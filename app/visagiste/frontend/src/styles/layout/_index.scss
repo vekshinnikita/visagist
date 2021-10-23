@@ -1,6 +1,8 @@
 @forward './navbar';
-@forward './courseDetail';
+@forward './coursedetail/courseDetail';
 @forward './homePage';
+@forward './widget/index';
+
 
 main {
     padding-top: 80px;

@@ -3,6 +3,37 @@ import { useDispatch, useSelector } from "react-redux";
 import {  featchCourseDetail } from '@/state/courses/courses.actions'
 import { selectCourseDetail } from '@/selectors'
 import { Link, useParams } from "react-router-dom";
+import { WidgetTypes } from "@/typing/entities";
+import TextWidget from "../widgets/TextWidget";
+import ImageWidget from "../widgets/ImageWidget";
+import FeaturesWidget from "../widgets/FeaturesWidget";
+import CourseImagesWidget from "../widgets/CourseImagesWidget";
+import CourseProgramWidget from "../widgets/CourseProgramWidget";
+import CourseSchedulerWidget from "../widgets/CourseSchedulerWidget";
+
+
+export interface WidgetProps<T> {
+  widget: T;
+}
+
+export const Widget: FC<WidgetProps<any>> = ({ ...props }) => {
+  switch (props.widget.type) {
+    case WidgetTypes.TEXT_WIDGET:
+      return <TextWidget {...props} />;
+    case WidgetTypes.IMAGE_WIDGET:
+      return <ImageWidget {...props} />;
+    case WidgetTypes.FEATURES_WIDGET:
+      return <FeaturesWidget {...props} />;
+    case WidgetTypes.COURSE_IMAGES_WIDGET:
+      return <CourseImagesWidget {...props} />;
+    case WidgetTypes.COURSE_PROGRAM_WIDGET:
+      return <CourseProgramWidget {...props} />;
+    case WidgetTypes.COURSE_SCHEDULE_WIDGET:
+      return <CourseSchedulerWidget {...props} />;
+    default:
+      return <></>;
+  }
+};
 
 
 const CourseDetail: FC = () => {
@@ -13,7 +44,6 @@ const CourseDetail: FC = () => {
         dispatch(featchCourseDetail(Number(pk)))
     }, [pk])
     const course = useSelector(selectCourseDetail);
-    console.log(course)
  
     return (
         <main>
@@ -22,8 +52,7 @@ const CourseDetail: FC = () => {
                 <div className="container">
                     <div className="course-cover">
                         <div className="row-course">
-                            <div className="photo-course" 
-                            style={{ backgroundImage: `url(${course.image})` }}>
+                            <div className="photo-course">
                             </div>
                             <div className="course-title">
                                 <div className="cover-space"></div>
@@ -31,20 +60,13 @@ const CourseDetail: FC = () => {
                             </div>
                         </div>
                     </div>
-                    
-                    <div className="course-body">
-                        <div className="course-description">
-                            <p>Модульная система курсов — новый эффективный формат обучения визажистов разработанный нашей командой.</p>
-
-                            <p>Мы создали систему модулей – интенсивных курсов обучения визажистов направленной специализации, для осознанного обучения и достижения высоких результатов.</p>
-                                
-                            <p>Каждый модуль отвечает вашим конкретным целям и задачам, хотите вы окончить курс в целях личного развития для себя или действительно начать карьеру профессионального визажиста – выбор только за вами.</p>
-                                
-                            <p>Каждый модуль посвящен одному из основных направлений профессионального макияжа: работа с клиентами (commercial), свадьбы (свадебный стилист, курс по прическам), работа на съемках (photo make-up). Система обучения по модулям позволяет вам максимально углубленно изучать интересующее вас направление или пройти все модули полностью.</p>
-                                
-                            <p>В программу занятий входят не отдельные техники и виды макияжа, а готовые продающие образы, которые покупают реальные клиенты, а не просто собирают лайки в инстаграм. Каждый модуль ведет преподаватель успешный в своей сфере – клиенты, свадьбы или съемки.</p>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div>
+                <div className="container">
+                    {course.widgets?.map((w) => (
+                    <Widget widget={w} key={w.id} />
+                    ))}
                 </div>
             </div>
             <div className="signup">
@@ -74,30 +96,6 @@ const CourseDetail: FC = () => {
                         
                     </div>  
                 </div>
-            </div>
-
-            <div className="contact">
-                <div className="container">
-                    <div className="contact-info">
-                        <div className="contact-num-info">
-                            <h3>АДРЕС</h3>
-                            <div className="contact-row">
-                                <p>ул. Сухэ-Батора, 7,</p>
-                                <p>Бизнес центр "Винни Пух",</p>
-                                <p>4 этаж,</p>
-                                <p>410 офис</p>
-                            </div>
-                        </div>
-
-                        <div className="contact-num-info">
-                            <h3>Контакты</h3>
-                            <div className="contact-row contact-num">
-                                <a href="#">+7 (924) 354 44 54</a>
-                                <a href="#" className="a"><p>@lemeshevadasha</p></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
             </div>
         </div>
     </main>

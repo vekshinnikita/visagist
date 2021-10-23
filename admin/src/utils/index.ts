@@ -116,14 +116,10 @@ export const stringifyDate = (date: Date) => {
   timezone = timezone.startsWith("-") ? timezone : "+" + timezone;
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
-<<<<<<< HEAD
-};
-=======
-};
+  }
 
 export const getPositionForNewChild = (items: Draggable[]) =>
   Math.max(...items.map((i) => i.position), 0) + 1;
 
 export const getIdForNewChild = (items: { id: number }[]) =>
-  Math.max(...items.map((i) => i.id), 0) + 1;
->>>>>>> fe3df1cba9ae51b3eb35eebf923a2a4972e7ebe9
+  Math.max(...items.map((i) => i.id), 0) + 1

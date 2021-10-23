@@ -15,3 +15,6 @@ export enum WidgetTypes {
   COURSE_IMAGES_WIDGET = "COURSE_IMAGES_WIDGET",
   COURSE_PROGRAM_WIDGET = "COURSE_PROGRAM_WIDGET",
 }
+export enum IconTypes {
+  CHECK_MARK = "CM",
+}

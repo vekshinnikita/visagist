@@ -3,6 +3,7 @@ import Intro from "./components/Intro";
 import VisagisteCourse from "./components/VisagisteCourse";
 
 
+
 const Home: FC = () => {
   return (
     <main className="home">

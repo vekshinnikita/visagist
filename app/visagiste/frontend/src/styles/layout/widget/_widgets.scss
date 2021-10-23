@@ -1,0 +1,134 @@
+.course-description{
+  margin: 0 0 40px 0;
+}
+
+.feature{
+  padding: 0 0 25px 0;
+  margin: 0 0 35px 0;
+}
+.features-row{
+  display:flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  .feature{
+      text-align: center;
+      display:flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      padding: 0 10px;
+      i{
+          background-color: pink;
+          color: #fff;
+          font-size: 23px;
+          border-radius: 50%;
+          height: 46px;
+          width: 46px;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+      }
+  }
+}
+
+.main-photo-course{
+  padding: 0 0 20px 0;
+  margin: 0 0 30px;
+  img{
+      width: 100%;
+  }
+}
+
+
+.slider{
+  margin: 20px 0 40px 0;
+}
+.slider-card{
+  height:100%;
+  img{
+      height: 320px;
+      @media(max-width: 1020px){
+          height: 250px;
+      }
+      @media(max-width: 250px){
+          width: 100%;
+          height: 100%;
+      }
+  }
+  
+
+}
+
+.rec.rec-arrow {
+  @media(max-width: 420px){
+      display: none;
+  }
+}
+
+
+.course-dates{
+  text-align: center;
+  margin: 0 0 40px 0;
+  .course-dates-title{
+    margin: 0 0 30px 0;
+  }
+}
+
+.course-date{
+  display: flex;
+  margin: 0 0 20px 0;
+  padding: 15px 0;
+  justify-content: center;
+  background-color: #f4f8fe;
+  border-radius: 10px;
+  h3{
+      padding: 0 20px 0 0;
+  }
+}
+
+.simular-courses{
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 40px 0;
+}
+
+
+.simular-course-title{
+  text-align: center;
+  padding: 35px 0 0 0 ;
+
+  h2{
+      margin: 0 0 30px;
+  }
+  @media(max-width: 1200px){
+      font-size: 19px;
+   }
+}
+
+
+
+.simular-course{
+  display: flex;
+  margin: 0 0 20px 0;
+  padding: 10px 20px;
+  background-color: #f4f8fe;
+  border-radius: 10px;
+  @media(max-width: 1200px){
+      flex-direction: column;
+      background-color: #f4f8fe;
+      padding: 30px 10px 10px 10px;
+      text-align: center;
+      font-size: 19px;
+  }
+}
+
+.sc-body{
+  a{
+      font-size: 14px;
+  }
+}
+
+.course-module{
+  margin: 0 0 50px 0;
+}
+
+
