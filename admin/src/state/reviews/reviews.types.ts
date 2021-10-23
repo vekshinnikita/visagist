@@ -74,6 +74,24 @@ export type DeleteReviewSuccess = (
 ) => DeleteReviewSuccessValue;
 export type DeleteReviewFailed = () => DeleteReviewFailedValue;
 
+export type MoveReviewValue = {
+  type: typeof constants.MOVE_REVIEW;
+  review: Review;
+};
+
+export type MoveReviewSuccessValue = {
+  type: typeof constants.MOVE_REVIEW_SUCCESS;
+  review: Review;
+};
+
+export type MoveReviewFailedValue = {
+  type: typeof constants.MOVE_REVIEW_FAILED;
+};
+
+export type MoveReview = (review: Review) => MoveReviewValue;
+export type MoveReviewSuccess = (review: Review) => MoveReviewSuccessValue;
+export type MoveReviewFailed = () => MoveReviewFailedValue;
+
 export type ActionsReturnValues =
   | GetReviewsValue
   | GetReviewsSuccessValue
@@ -86,4 +104,7 @@ export type ActionsReturnValues =
   | CreateReviewFailedValue
   | DeleteReviewValue
   | DeleteReviewSuccessValue
-  | DeleteReviewFailedValue;
+  | DeleteReviewFailedValue
+  | MoveReviewValue
+  | MoveReviewSuccessValue
+  | MoveReviewFailedValue;

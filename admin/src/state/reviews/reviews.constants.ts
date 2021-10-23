@@ -13,3 +13,7 @@ export const DELETE_REVIEW_FAILED = "@reviews/DELETE_REVIEW_FAILED";
 export const CREATE_REVIEW = "@reviews/CREATE_REVIEW";
 export const CREATE_REVIEW_SUCCESS = "@reviews/CREATE_REVIEW_SUCCESS";
 export const CREATE_REVIEW_FAILED = "@reviews/CREATE_REVIEW_FAILED";
+
+export const MOVE_REVIEW = "@reviews/MOVE_REVIEW";
+export const MOVE_REVIEW_SUCCESS = "@reviews/MOVE_REVIEW_SUCCESS";
+export const MOVE_REVIEW_FAILED = "@reviews/MOVE_REVIEW_FAILED";

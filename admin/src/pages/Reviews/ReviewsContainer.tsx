@@ -9,6 +9,7 @@ import { Review as IReview } from "@/types/models";
 import Reviews, { Review } from "./Reviews";
 import { getIdForNewChild, getItemById, getPositionForNewChild } from "@/utils";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { moveReview } from "@/state/reviews/reviews.actions";
 
 const ReviewsContainer: FC = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const ReviewsContainer: FC = () => {
       return;
     }
     dispatch(
-      updateReview({
+      moveReview({
         ...getItemById(reviews, Number(draggableId)),
         position: Number(destination.index),
       })

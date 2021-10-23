@@ -55,3 +55,17 @@ export const deleteReviewSuccess: types.DeleteReviewSuccess = (reviewId) => ({
 export const deleteReviewFailed: types.DeleteReviewFailed = () => ({
   type: constants.DELETE_REVIEW_FAILED,
 });
+
+export const moveReview: types.MoveReview = (review) => ({
+  type: constants.MOVE_REVIEW,
+  review,
+});
+
+export const moveReviewSuccess: types.MoveReviewSuccess = (review) => ({
+  type: constants.MOVE_REVIEW_SUCCESS,
+  review,
+});
+
+export const moveReviewFailed: types.MoveReviewFailed = () => ({
+  type: constants.MOVE_REVIEW_FAILED,
+});

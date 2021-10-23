@@ -1,4 +1,4 @@
-import { CoursesSections, Pages, WidgetTypes } from "./enumerates";
+import { CoursesSections, Pages } from "./enumerates";
 import { CourseDetails, Course, Review } from "./models";
 
 export interface CoursesState {
@@ -33,6 +33,7 @@ export interface ReviewsState {
   isCreateReviewLoading: boolean;
   isUpdateReviewLoading: boolean;
   isDeleteReviewLoading: boolean;
+  isMoveReviewLoading: boolean;
 }
 
 export interface RootState {

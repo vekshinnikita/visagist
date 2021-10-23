@@ -41,6 +41,17 @@ function* updateReviewWorker(action: types.UpdateReviewValue) {
   }
 }
 
+function* moveReviewWorker(action: types.UpdateReviewValue) {
+  try {
+    const review: Review = yield call(api.updateReviewApi, action.review);
+    yield put(actions.moveReviewSuccess(review));
+  } catch (error) {
+    console.log(error);
+    yield put(showAlert("Произошла ошибка" + error));
+    yield put(actions.moveReviewFailed());
+  }
+}
+
 function* deleteReviewWorker(action: types.DeleteReviewValue) {
   try {
     yield call(api.deleteReviewApi, action.reviewId);
@@ -56,6 +67,7 @@ function* deleteReviewWorker(action: types.DeleteReviewValue) {
 function* reviewsWatcher() {
   yield takeLatest(constants.GET_REVIEWS, getReviewsWorker);
   yield takeLatest(constants.UPDATE_REVIEW, updateReviewWorker);
+  yield takeLatest(constants.MOVE_REVIEW, moveReviewWorker);
   yield takeLatest(constants.CREATE_REVIEW, createReviewWorker);
   yield takeLatest(constants.DELETE_REVIEW, deleteReviewWorker);
 }

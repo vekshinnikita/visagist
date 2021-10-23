@@ -15,6 +15,7 @@ const initialState: ReviewsState = {
   isCreateReviewLoading: false,
   isDeleteReviewLoading: false,
   isUpdateReviewLoading: false,
+  isMoveReviewLoading: false,
 };
 
 const reviewsReducer = (
@@ -56,12 +57,7 @@ const reviewsReducer = (
         ...state,
         isCreateReviewLoading: false,
       };
-    case constants.UPDATE_REVIEW:
-      return {
-        ...state,
-        isUpdateReviewLoading: true,
-      };
-    case constants.UPDATE_REVIEW_SUCCESS:
+    case constants.MOVE_REVIEW:
       try {
         const reviews: Review[] = getItemsListWithoutSpecificOne(
           state.reviews,
@@ -88,15 +84,39 @@ const reviewsReducer = (
             ...others,
             action.review,
           ]),
-          isUpdateReviewLoading: false,
+          isUpdateReviewLoading: true,
         };
       } catch {
         return state;
       }
-    case constants.UPDATE_REVIEW_FAILED:
+    case constants.MOVE_REVIEW_SUCCESS:
       return {
         ...state,
         isUpdateReviewLoading: false,
+      };
+    case constants.MOVE_REVIEW_FAILED:
+      return {
+        ...state,
+        isUpdateReviewLoading: false,
+      };
+    case constants.UPDATE_REVIEW:
+      return {
+        ...state,
+        isMoveReviewLoading: true,
+      };
+    case constants.UPDATE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        reviews: [
+          ...state.reviews.filter((r) => r.id !== action.review.id),
+          action.review,
+        ],
+        isMoveReviewLoading: false,
+      };
+    case constants.UPDATE_REVIEW_FAILED:
+      return {
+        ...state,
+        isMoveReviewLoading: false,
       };
     case constants.DELETE_REVIEW:
       return {
