@@ -1,0 +1,29 @@
+export const GET_STUDENTS_WORK = "@studentsWork/GET_STUDENTS_WORK";
+export const GET_STUDENTS_WORK_SUCCESS =
+  "@studentsWork/GET_STUDENTS_WORK_SUCCESS";
+export const GET_STUDENTS_WORK_FAILED =
+  "@studentsWork/GET_STUDENTS_WORK_FAILED";
+
+export const UPDATE_STUDENT_WORK = "@studentsWork/UPDATE_STUDENT_WORK";
+export const UPDATE_STUDENT_WORK_SUCCESS =
+  "@studentsWork/UPDATE_STUDENT_WORK_SUCCESS";
+export const UPDATE_STUDENT_WORK_FAILED =
+  "@studentsWork/UPDATE_STUDENT_WORK_FAILED";
+
+export const DELETE_STUDENT_WORK = "@studentsWork/DELETE_STUDENT_WORK";
+export const DELETE_STUDENT_WORK_SUCCESS =
+  "@studentsWork/DELETE_STUDENT_WORK_SUCCESS";
+export const DELETE_STUDENT_WORK_FAILED =
+  "@studentsWork/DELETE_STUDENT_WORK_FAILED";
+
+export const CREATE_STUDENT_WORK = "@studentsWork/CREATE_STUDENT_WORK";
+export const CREATE_STUDENT_WORK_SUCCESS =
+  "@studentsWork/CREATE_STUDENT_WORK_SUCCESS";
+export const CREATE_STUDENT_WORK_FAILED =
+  "@studentsWork/CREATE_STUDENT_WORK_FAILED";
+
+export const MOVE_STUDENT_WORK = "@studentsWork/MOVE_STUDENT_WORK";
+export const MOVE_STUDENT_WORK_SUCCESS =
+  "@studentsWork/MOVE_STUDENT_WORK_SUCCESS";
+export const MOVE_STUDENT_WORK_FAILED =
+  "@studentsWork/MOVE_STUDENT_WORK_FAILED";

@@ -3,7 +3,7 @@ from core.serializers import Base64ImageField
 from widgets.models import Widget
 from widgets.utils import serialize_widget, serialize_admin_widget, clear_course_widgets, create_course_widgets
 from widgets.serializers.fields import WidgetField
-from .models import Course, Review
+from .models import Course, Review, StudentWork
 
 
 class ShortCourseRetriveSerializer(serializers.ModelSerializer):
@@ -79,4 +79,12 @@ class Base64ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = "__all__"
+        fields = '__all__'
+
+
+class Base64StudentWorkSerializer(serializers.ModelSerializer):
+    image = Base64ImageField(represent_in_base64=True)
+
+    class Meta:
+        model = StudentWork
+        fields = '__all__'

@@ -1,33 +1,29 @@
-import { SERVER_URL } from "@/env";
-import { axiosAPI } from "@/utils";
+import { api } from "@/utils";
 import { CourseDetails } from "@/types/models";
 
-const getCoursesListUrl = () => SERVER_URL + "/api/admin/courses/";
-const getCoursesDetailsUrl = (pk: number) =>
-  SERVER_URL + `/api/admin/courses/${pk}/`;
+const getCoursesListUrl = () => "/admin/courses/";
+const getCoursesDetailsUrl = (pk: number) => `/admin/courses/${pk}/`;
 
 export const getCoursesApi = () =>
-  axiosAPI.get(getCoursesListUrl()).then((response) => response.data);
+  api.get(getCoursesListUrl()).then((response) => response.data);
 export const createCourseApi = (course: CourseDetails) =>
-  axiosAPI.post(getCoursesListUrl(), course).then((response) => response.data);
+  api.post(getCoursesListUrl(), course).then((response) => response.data);
 export const getCurrentCourseApi = (pk: number) =>
-  axiosAPI.get(getCoursesDetailsUrl(pk)).then((response) => response.data);
+  api.get(getCoursesDetailsUrl(pk)).then((response) => response.data);
 export const deleteCourseApi = (pk: number) =>
-  axiosAPI.delete(getCoursesDetailsUrl(pk)).then((response) => response.data);
+  api.delete(getCoursesDetailsUrl(pk)).then((response) => response.data);
 export const updateCourseApi = (pk: number, course: CourseDetails) =>
-  axiosAPI
-    .put(getCoursesDetailsUrl(pk), course)
-    .then((response) => response.data);
+  api.put(getCoursesDetailsUrl(pk), course).then((response) => response.data);
 
 export const hideCoursesApi = (ids: number[]) =>
-  axiosAPI
+  api
     .post(getCoursesListUrl() + "hide/", { ids })
     .then((response) => response.data);
 export const revealCoursesApi = (ids: number[]) =>
-  axiosAPI
+  api
     .post(getCoursesListUrl() + "reveal/", { ids })
     .then((response) => response.data);
 export const deleteCoursesApi = (ids: number[]) =>
-  axiosAPI
+  api
     .post(getCoursesListUrl() + "delete/", { ids })
     .then((response) => response.data);

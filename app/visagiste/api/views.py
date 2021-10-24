@@ -2,9 +2,9 @@ from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes
 
-from .utils import update_reviews_sequence
-from .models import Course, Review
-from .serializers import CourseRetriveSerializer, CourseCreateSerializer, ShortCourseRetriveSerializer, Base64CourseRetriveSerializer, Base64ReviewSerializer
+from core.views import DraggableImageViewSet
+from .models import Course, Review, StudentWork
+from .serializers import Base64StudentWorkSerializer, CourseRetriveSerializer, CourseCreateSerializer, ShortCourseRetriveSerializer, Base64CourseRetriveSerializer, Base64ReviewSerializer
 
 
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
@@ -81,32 +81,15 @@ def delete_courses(request):
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class AdminReviewViewSet(viewsets.ModelViewSet):
+class AdminReviewViewSet(DraggableImageViewSet):
     permission_classes = []
     serializer_class = Base64ReviewSerializer
     queryset = Review.objects.all()
+    model = Review
 
-    def create(self, request, *args, **kwargs):
-        serializer = Base64ReviewSerializer(data={'image': request.data['image']})
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        reviews_qty = Review.objects.all().count()
-        update_reviews_sequence(serializer.data['id'], reviews_qty, 0)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    
-    def update(self, request, *args, **kwargs):
-        old_review: Review = self.get_object()
-        old_position = old_review.position
-        serializer = Base64ReviewSerializer(old_review, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        if request.data["position"] != old_position:
-            update_reviews_sequence(request.data['id'], old_position, request.data['position'])
-        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-    
-    def destroy(self, request, *args, **kwargs):
-        review_to_delete: Review = self.get_object()
-        reviews_qty = Review.objects.all().count()
-        update_reviews_sequence(review_to_delete.id, review_to_delete.position, reviews_qty)
-        review_to_delete.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class AdminStudentWorkViewSet(DraggableImageViewSet):
+    permission_classes = []
+    serializer_class = Base64StudentWorkSerializer
+    queryset = StudentWork.objects.all()
+    model = StudentWork

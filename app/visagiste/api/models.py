@@ -14,5 +14,5 @@ class Review(Draggable):
     image = models.ImageField()
 
 
-class StudentWorkImage(Draggable):
+class StudentWork(Draggable):
     image = models.ImageField()

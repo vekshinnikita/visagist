@@ -1,5 +1,5 @@
 import { CoursesSections, Pages } from "./enumerates";
-import { CourseDetails, Course, Review } from "./models";
+import { CourseDetails, Course, Review, StudentWork } from "./models";
 
 export interface CoursesState {
   currentCourse: CourseDetails;
@@ -36,10 +36,20 @@ export interface ReviewsState {
   isMoveReviewLoading: boolean;
 }
 
+export interface StudentWorkState {
+  studentsWork: StudentWork[];
+  isGetStudentsWorkLoading: boolean;
+  isCreateStudentWorkLoading: boolean;
+  isUpdateStudentWorkLoading: boolean;
+  isDeleteStudentWorkLoading: boolean;
+  isMoveStudentWorkLoading: boolean;
+}
+
 export interface RootState {
   auth: AuthState;
   courses: CoursesState;
   components: ComponentsState;
   alert: AlertState;
   reviews: ReviewsState;
+  studentsWork: StudentWorkState;
 }

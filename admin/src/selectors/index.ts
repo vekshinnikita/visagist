@@ -33,3 +33,7 @@ export const selectIsUpdateCourseLoading = (state: RootState) =>
 
 // Reviews
 export const selectReviews = (state: RootState) => state.reviews.reviews;
+
+// Students Work
+export const selectStudentsWork = (state: RootState) =>
+  state.studentsWork.studentsWork;

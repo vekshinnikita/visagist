@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
-import { Review as IReview } from "@/types/models";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import { Review as IReview } from "@/types/models";
 
 interface ReviewProps {
   review: IReview;

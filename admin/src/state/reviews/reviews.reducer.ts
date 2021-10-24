@@ -84,7 +84,7 @@ const reviewsReducer = (
             ...others,
             action.review,
           ]),
-          isUpdateReviewLoading: true,
+          isMoveReviewLoading: true,
         };
       } catch {
         return state;
@@ -92,31 +92,31 @@ const reviewsReducer = (
     case constants.MOVE_REVIEW_SUCCESS:
       return {
         ...state,
-        isUpdateReviewLoading: false,
+        isMoveReviewLoading: false,
       };
     case constants.MOVE_REVIEW_FAILED:
       return {
         ...state,
-        isUpdateReviewLoading: false,
+        isMoveReviewLoading: false,
       };
     case constants.UPDATE_REVIEW:
       return {
         ...state,
-        isMoveReviewLoading: true,
+        isUpdateReviewLoading: true,
       };
     case constants.UPDATE_REVIEW_SUCCESS:
       return {
         ...state,
-        reviews: [
+        reviews: sortDraggableByPosition([
           ...state.reviews.filter((r) => r.id !== action.review.id),
           action.review,
-        ],
-        isMoveReviewLoading: false,
+        ]),
+        isUpdateReviewLoading: false,
       };
     case constants.UPDATE_REVIEW_FAILED:
       return {
         ...state,
-        isMoveReviewLoading: false,
+        isUpdateReviewLoading: false,
       };
     case constants.DELETE_REVIEW:
       return {

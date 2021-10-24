@@ -5,17 +5,18 @@ import { Draggable } from "@/types/models";
 export const getAccessToken = () => localStorage.getItem("access_token");
 export const getRefreshToken = () => localStorage.getItem("refresh_token");
 
-export const axiosAPI = axios.create({
+export const api = axios.create({
+  baseURL: SERVER_URL + "/api",
   headers: {
     Authorization: "Bearer " + getAccessToken(),
   },
 });
 
-axiosAPI.interceptors.response.use(
+api.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
     const originalRequest = error.config;
-    const refreshUrl = SERVER_URL + "/token/refresh/";
+    const refreshUrl = SERVER_URL + "/api/token/refresh/";
 
     if (error.response) {
       if (error.response.status === 401 && originalRequest.url === refreshUrl) {
@@ -38,14 +39,14 @@ axiosAPI.interceptors.response.use(
           const now: number = Math.ceil(Date.now() / 1000);
 
           if (tokenParts.exp > now) {
-            return axiosAPI
+            return api
               .post(refreshUrl, { refresh: refreshToken })
               .then((response: AxiosResponse) => {
                 setNewHeaders(response);
                 originalRequest.headers["Authorization"] =
                   "Bearer " + response.data.access;
 
-                return axiosAPI(originalRequest);
+                return api(originalRequest);
               })
               .catch((error: AxiosError) => {
                 console.log(error);
@@ -66,7 +67,7 @@ axiosAPI.interceptors.response.use(
 );
 
 export const setNewHeaders = (response: AxiosResponse) => {
-  axiosAPI.defaults.headers["Authorization"] = "Bearer " + response.data.access;
+  api.defaults.headers["Authorization"] = "Bearer " + response.data.access;
   localStorage.setItem("access_token", response.data.access);
   localStorage.setItem("refresh_token", response.data.refresh);
 };
@@ -74,7 +75,7 @@ export const setNewHeaders = (response: AxiosResponse) => {
 export const removeHeaders = () => {
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
-  axiosAPI.defaults.headers["Authentication"] = undefined;
+  api.defaults.headers["Authentication"] = undefined;
 };
 
 export const getItemsListWithoutSpecificOne = (

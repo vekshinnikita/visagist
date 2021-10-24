@@ -76,3 +76,9 @@ export interface Review {
   position: number;
   image: any;
 }
+
+export interface StudentWork {
+  id: number;
+  position: number;
+  image: any;
+}
