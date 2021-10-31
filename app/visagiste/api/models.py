@@ -1,7 +1,5 @@
 from django.db import models
-from django.contrib.contenttypes.fields import GenericRelation
-from core.models import Image, Draggable
-
+from core.models import Draggable
 
 class Course(Draggable):
     title = models.CharField(max_length=255)
@@ -10,11 +8,11 @@ class Course(Draggable):
 
     def __str__(self) -> str:
         return self.title
-    
-
-class InstagramReview(Draggable):
-    pass
 
 
-class StudentWorkImage(Draggable):
-    image = GenericRelation(Image)
+class Review(Draggable):
+    image = models.ImageField()
+
+
+class StudentWork(Draggable):
+    image = models.ImageField()

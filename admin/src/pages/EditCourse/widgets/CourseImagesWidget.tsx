@@ -3,7 +3,7 @@ import {
   CourseImagesWidget as ICourseImagesWidget,
   Image as CourseImage,
 } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer/WidgetContainer";
+import { WidgetProps } from "../WidgetContainer";
 import ImageField from "@/common/components/ImageField";
 import ChildrenWrapper, {
   ChildComponentProps,

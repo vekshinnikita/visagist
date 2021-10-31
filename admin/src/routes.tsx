@@ -23,6 +23,7 @@ const routes = (
         component={StudentsWorkContainer}
       />
       <PrivateRoute path="/course/:pk/" exact component={EditCourseContainer} />
+      <PrivateRoute path="/reviews/" exact component={ReviewsContainer} />
       <Route path="/sign_in/" exact component={SignInContainer} />
     </Switch>
 

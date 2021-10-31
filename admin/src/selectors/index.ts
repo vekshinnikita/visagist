@@ -20,6 +20,8 @@ export const selectGetCoursesIsLoading = (state: RootState) =>
   state.courses.getCoursesIsLoading;
 export const selectCurrentCourse = (state: RootState) =>
   state.courses.currentCourse;
+export const selectIsCurrentCourseLoading = (state: RootState) =>
+  state.courses.getCurrentCourseIsLoading;
 export const selectCurrentCourseWidgets = (state: RootState) =>
   state.courses.currentCourse.widgets;
 export const selectIsCourseCreateLoading = (state: RootState) =>
@@ -28,3 +30,10 @@ export const selectIsBulkActionsLoading = (state: RootState) =>
   state.courses.bulkActionsIsLoading;
 export const selectIsUpdateCourseLoading = (state: RootState) =>
   state.courses.updateCourseIsLoading;
+
+// Reviews
+export const selectReviews = (state: RootState) => state.reviews.reviews;
+
+// Students Work
+export const selectStudentsWork = (state: RootState) =>
+  state.studentsWork.studentsWork;

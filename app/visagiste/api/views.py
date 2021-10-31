@@ -1,8 +1,10 @@
 from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes
-from .models import Course
-from .serializers import CourseRetriveSerializer, CourseCreateSerializer, ShortCourseRetriveSerializer, Base64CourseRetriveSerializer
+
+from core.views import DraggableImageViewSet
+from .models import Course, Review, StudentWork
+from .serializers import Base64StudentWorkSerializer, CourseRetriveSerializer, CourseCreateSerializer, ShortCourseRetriveSerializer, Base64CourseRetriveSerializer, Base64ReviewSerializer
 
 
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
@@ -69,6 +71,7 @@ def reveal_courses(request):
     return Response(status=status.HTTP_200_OK)
 
 
+@authentication_classes([permissions.IsAuthenticated])
 @api_view(['POST'])
 def delete_courses(request):
     courses_ids = request.data['ids']
@@ -76,3 +79,17 @@ def delete_courses(request):
         course = Course.objects.get(id=i)
         course.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class AdminReviewViewSet(DraggableImageViewSet):
+    permission_classes = []
+    serializer_class = Base64ReviewSerializer
+    queryset = Review.objects.all()
+    model = Review
+
+
+class AdminStudentWorkViewSet(DraggableImageViewSet):
+    permission_classes = []
+    serializer_class = Base64StudentWorkSerializer
+    queryset = StudentWork.objects.all()
+    model = StudentWork

@@ -2,7 +2,7 @@ import { FC } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { TextWidget as ITextWidget } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer/WidgetContainer";
+import { WidgetProps } from "../WidgetContainer";
 
 const TextWidget: FC<WidgetProps<ITextWidget>> = ({
   widget,

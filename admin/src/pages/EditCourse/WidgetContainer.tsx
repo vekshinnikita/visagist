@@ -10,13 +10,13 @@ import { WidgetTypes } from "@/types/enumerates";
 import Actions, {
   DeleteAction,
   HideRevealAction,
-} from "../widgets/components/Actions";
-import TextWidget from "../widgets/TextWidget";
-import ImageWidget from "../widgets/ImageWidget";
-import CourseImagesWidget from "../widgets/CourseImagesWidget";
-import CourseProgramWidget from "../widgets/CourseProgramWidget";
-import FeaturesWidget from "../widgets/FeaturesWidget";
-import CourseSchedulerWidget from "../widgets/CourseSchedulerWidget";
+} from "./widgets/components/Actions";
+import TextWidget from "./widgets/TextWidget";
+import ImageWidget from "./widgets/ImageWidget";
+import CourseImagesWidget from "./widgets/CourseImagesWidget";
+import CourseProgramWidget from "./widgets/CourseProgramWidget";
+import FeaturesWidget from "./widgets/FeaturesWidget";
+import CourseSchedulerWidget from "./widgets/CourseSchedulerWidget";
 import { Draggable } from "react-beautiful-dnd";
 
 interface WidgetContainerProps {

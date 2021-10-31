@@ -5,7 +5,7 @@ import {
   CourseProgramModule as ICourseProgramModule,
   CourseProgramWidget as ICourseProgramWidget,
 } from "@/types/models";
-import { WidgetProps } from "../WidgetContainer/WidgetContainer";
+import { WidgetProps } from "../WidgetContainer";
 import ChildrenWrapper, {
   ChildComponentProps,
 } from "./components/ChildrenWrapper";

@@ -22,7 +22,7 @@ const Alert: FC<AlertProps> = ({ message, resetAlert }) => {
         }, 600);
       }, 2000);
     }
-  }, [alertRef, message]);
+  }, [alertRef, message, resetAlert]);
 
   return (
     <div className="alert alert-hide" ref={alertRef}>

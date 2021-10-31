@@ -70,3 +70,15 @@ export interface SignInData {
   username: string;
   password: string;
 }
+
+export interface Review {
+  id: number;
+  position: number;
+  image: any;
+}
+
+export interface StudentWork {
+  id: number;
+  position: number;
+  image: any;
+}

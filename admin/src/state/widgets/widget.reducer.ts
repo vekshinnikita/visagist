@@ -2,8 +2,9 @@ import { CourseDetails, Widget } from "@/types/models";
 import { ActionsReturnValues } from "./widget.types";
 import * as constants from "./widget.constants";
 import {
-  getWidget,
-  getWidgetsListWithoutSpecificOne,
+  getFixedDraggableSequence,
+  getItemById,
+  getItemsListWithoutSpecificOne,
   sortDraggableByPosition,
 } from "@/utils";
 
@@ -27,7 +28,7 @@ const widgetReducer = (
         widgets: [...prevWidgetsC, action.widget, ...nextWidgetsC],
       };
     case constants.DELETE_WIDGET:
-      const widgetsD = getWidgetsListWithoutSpecificOne(
+      const widgetsD: Widget[] = getItemsListWithoutSpecificOne(
         currentCourse.widgets,
         action.widget.id
       );
@@ -49,7 +50,7 @@ const widgetReducer = (
       return {
         ...currentCourse,
         widgets: sortDraggableByPosition([
-          ...getWidgetsListWithoutSpecificOne(
+          ...getItemsListWithoutSpecificOne(
             currentCourse.widgets,
             action.widget.id
           ),
@@ -59,38 +60,32 @@ const widgetReducer = (
 
     case constants.MOVE_WIDGET:
       try {
-        const widgetsM = getWidgetsListWithoutSpecificOne(
+        const widgets: Widget[] = getItemsListWithoutSpecificOne(
           currentCourse.widgets,
           action.widgetId
         );
-        const widgetM = getWidget(currentCourse.widgets, action.widgetId);
-        let moved: Widget[] = [];
-
-        if (action.position < widgetM.position) {
-          moved = widgetsM.filter(
-            (w) =>
-              w.position >= action.position && w.position < widgetM.position
-          );
-          moved.map((w) => w.position++);
-        } else if (action.position > widgetM.position) {
-          moved = widgetsM.filter(
-            (w) =>
-              w.position <= action.position && w.position > widgetM.position
-          );
-          moved.map((w) => w.position--);
-        } else {
-          return currentCourse;
-        }
-
-        const others = widgetsM.filter(
-          (w) => !moved.map((m) => m.id).includes(w.id)
+        const widget: Widget = getItemById(
+          currentCourse.widgets,
+          action.widgetId
         );
 
-        widgetM.position = action.position;
+        if (widget.position === action.position) return currentCourse;
+
+        const moved: any = getFixedDraggableSequence(
+          widgets,
+          widget.position,
+          action.position
+        );
+
+        const others = widgets.filter(
+          (w) => !moved.map((m: { id: number }) => m.id).includes(w.id)
+        );
+
+        widget.position = action.position;
 
         return {
           ...currentCourse,
-          widgets: sortDraggableByPosition([...moved, ...others, widgetM]),
+          widgets: sortDraggableByPosition([...moved, ...others, widget]),
         };
       } catch {
         return currentCourse;
@@ -98,13 +93,16 @@ const widgetReducer = (
 
     case constants.HIDE_WIDGET:
       try {
-        const widget = getWidget(currentCourse.widgets, action.widgetId);
+        const widget: Widget = getItemById(
+          currentCourse.widgets,
+          action.widgetId
+        );
         widget.is_visible = false;
 
         return {
           ...currentCourse,
           widgets: sortDraggableByPosition([
-            ...getWidgetsListWithoutSpecificOne(
+            ...getItemsListWithoutSpecificOne(
               currentCourse.widgets,
               action.widgetId
             ),
@@ -116,13 +114,16 @@ const widgetReducer = (
       }
     case constants.REVEAL_WIDGET:
       try {
-        const widget = getWidget(currentCourse.widgets, action.widgetId);
+        const widget: Widget = getItemById(
+          currentCourse.widgets,
+          action.widgetId
+        );
         widget.is_visible = true;
 
         return {
           ...currentCourse,
           widgets: sortDraggableByPosition([
-            ...getWidgetsListWithoutSpecificOne(
+            ...getItemsListWithoutSpecificOne(
               currentCourse.widgets,
               action.widgetId
             ),

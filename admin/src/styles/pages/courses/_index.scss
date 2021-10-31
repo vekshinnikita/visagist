@@ -1,2 +1,14 @@
 @forward "./courses_navbar";
 @forward "./courses_list";
+
+section.timetable,
+section.analytics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: 60px;
+    opacity: 0.6;
+  }
+}
